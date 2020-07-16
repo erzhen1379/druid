@@ -1,12 +1,12 @@
 package com.alibaba.druid.bvt.filter.config;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.filter.config.ConfigFilter;
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class ConfigFilterTest1 extends TestCase {
     private DruidDataSource dataSource;
@@ -18,7 +18,7 @@ public class ConfigFilterTest1 extends TestCase {
     }
     
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
     
     public void test_decrypt() throws Exception {

@@ -15,17 +15,17 @@
  */
 package com.alibaba.druid.bvt.sql.postgresql;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PGFormatTest extends TestCase {
 
     public void test_0() throws Exception {
         String sql = "CREATE TABLE foo (fooid int, foosubid int, fooname text);";
-        String formatedSql = SQLUtils.format(sql, JdbcUtils.POSTGRESQL);
+        String formatedSql = SQLUtils.format(sql, WallDenyStat.JdbcUtils.POSTGRESQL);
         Assert.assertEquals("CREATE TABLE foo (" + //
                             "\n\tfooid int," + //
                             "\n\tfoosubid int," + //

@@ -15,10 +15,10 @@
  */
 package com.alibaba.druid.bvt.sql.oracle;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.sql.visitor.ParameterizedOutputVisitorUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class MergeTest extends TestCase {
 
@@ -31,15 +31,15 @@ public class MergeTest extends TestCase {
     public void test_mergeCall_oracle() throws Exception {
         String sql = "{ call INTERFACE_DATA_EXTRACTION.INVOICE_INFO(?,?,?)}";
 
-        ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.ORACLE);
-        ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.OCEANBASE_ORACLE);
-        ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.ALI_ORACLE);
+        ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.ORACLE);
+        ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.OCEANBASE_ORACLE);
+        ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.ALI_ORACLE);
     }
 
     public void test_mergeCall_mysql() throws Exception {
         String sql = "{ call INTERFACE_DATA_EXTRACTION.INVOICE_INFO(?,?,?)}";
 
-        ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.MYSQL);
-        ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.OCEANBASE);
+        ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.MYSQL);
+        ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.OCEANBASE);
     }
 }

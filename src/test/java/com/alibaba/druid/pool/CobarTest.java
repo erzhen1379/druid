@@ -17,10 +17,10 @@ package com.alibaba.druid.pool;
 
 import java.sql.Connection;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.vendor.MySqlExceptionSorter;
-import com.alibaba.druid.util.JdbcUtils;
 
 
 public class CobarTest extends TestCase {
@@ -38,7 +38,7 @@ public class CobarTest extends TestCase {
     }
     
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_0() throws Exception {

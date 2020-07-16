@@ -2,10 +2,10 @@ package com.alibaba.druid.bvt.bug;
 
 import java.sql.Connection;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class Bug_for_wdw1206 extends TestCase {
 
@@ -26,7 +26,7 @@ public class Bug_for_wdw1206 extends TestCase {
     protected void tearDown() throws Exception {
         Thread.currentThread().setContextClassLoader(ctxClassLoader);
         
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_nullCtxClassLoader() throws Exception {

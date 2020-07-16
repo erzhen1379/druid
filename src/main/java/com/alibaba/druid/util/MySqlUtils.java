@@ -17,6 +17,7 @@ package com.alibaba.druid.util;
 
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.statement.SQLCreateTableStatement;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import javax.sql.XAConnection;
 import java.lang.reflect.Constructor;
@@ -242,8 +243,8 @@ public class MySqlUtils {
                 tables.add(tableName);
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
 
         return tables;
@@ -271,11 +272,11 @@ public class MySqlUtils {
                         ddlList.add(ddl);
                     }
                 } finally {
-                    JdbcUtils.close(rs);
+                    WallDenyStat.JdbcUtils.close(rs);
                 }
             }
         } finally {
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
 
 

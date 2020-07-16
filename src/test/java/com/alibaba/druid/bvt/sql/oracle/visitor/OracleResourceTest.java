@@ -21,6 +21,7 @@ import java.io.Reader;
 import java.util.List;
 
 import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import com.alibaba.druid.sql.OracleTest;
@@ -29,7 +30,6 @@ import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
 import com.alibaba.druid.sql.dialect.oracle.parser.OracleStatementParser;
 import com.alibaba.druid.sql.dialect.oracle.visitor.OracleSchemaStatVisitor;
 import com.alibaba.druid.util.Utils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class OracleResourceTest extends OracleTest {
 
@@ -48,7 +48,7 @@ public class OracleResourceTest extends OracleTest {
         is = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
         Reader reader = new InputStreamReader(is, "UTF-8");
         String input = Utils.read(reader);
-        JdbcUtils.close(reader);
+        WallDenyStat.JdbcUtils.close(reader);
         String[] items = input.split("---------------------------");
         String sql = items[0].trim();
         String expect = items[1].trim();

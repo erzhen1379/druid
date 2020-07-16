@@ -92,8 +92,8 @@ import com.alibaba.druid.sql.visitor.functions.Ucase;
 import com.alibaba.druid.sql.visitor.functions.Unhex;
 import com.alibaba.druid.util.HexBin;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.Utils;
+import com.alibaba.druid.wall.WallDenyStat;
 import com.alibaba.druid.wall.spi.WallVisitorUtils;
 import com.alibaba.druid.wall.spi.WallVisitorUtils.WallConditionContext;
 
@@ -160,25 +160,25 @@ public class SQLEvalVisitorUtils {
     }
 
     public static SQLEvalVisitor createEvalVisitor(String dbType) {
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlEvalVisitorImpl();
         }
 
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleEvalVisitor();
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)
                 || JdbcConstants.ENTERPRISEDB.equals(dbType)
                 || JdbcConstants.POLARDB.equals(dbType)) {
             return new PGEvalVisitor();
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerEvalVisitor();
         }
 
-        if (JdbcUtils.DB2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2EvalVisitor();
         }
         

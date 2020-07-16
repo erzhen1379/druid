@@ -1,15 +1,13 @@
 package com.alibaba.druid.bvt.filter;
 
-import java.sql.CallableStatement;
 import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.NClob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Types;
 
-import com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl;
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -19,7 +17,6 @@ import com.alibaba.druid.mock.MockNClob;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.proxy.jdbc.ConnectionProxy;
 import com.alibaba.druid.proxy.jdbc.StatementProxy;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class FilterChainImplTest extends TestCase {
 
@@ -38,7 +35,7 @@ public class FilterChainImplTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_size() {

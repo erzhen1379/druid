@@ -15,11 +15,11 @@
  */
 package com.alibaba.druid.bvt.sql.mysql;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class MySqlFormatTest2 extends TestCase {
 
@@ -36,6 +36,6 @@ public class MySqlFormatTest2 extends TestCase {
                 + "\n\t\tWHERE cq.component_uuid = cq2.component_uuid"
                 + "\n\t\t\tAND cq2.status <> ?"
                 + "\n\t)"
-                + "\nORDER BY cq.created_at ASC, cq.id ASC", SQLUtils.format(text, JdbcUtils.MYSQL));
+                + "\nORDER BY cq.created_at ASC, cq.id ASC", SQLUtils.format(text, WallDenyStat.JdbcUtils.MYSQL));
     }
 }

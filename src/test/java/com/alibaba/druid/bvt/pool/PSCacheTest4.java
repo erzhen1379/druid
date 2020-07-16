@@ -15,6 +15,7 @@
  */
 package com.alibaba.druid.bvt.pool;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -25,7 +26,6 @@ import com.alibaba.druid.pool.DruidPooledPreparedStatement;
 import com.alibaba.druid.pool.DruidPooledResultSet;
 import com.alibaba.druid.pool.PreparedStatementHolder;
 import com.alibaba.druid.pool.PreparedStatementPool;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PSCacheTest4 extends TestCase {
 
@@ -40,7 +40,7 @@ public class PSCacheTest4 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_pscache() throws Exception {

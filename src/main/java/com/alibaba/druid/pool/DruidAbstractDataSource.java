@@ -37,9 +37,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -67,10 +65,10 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.DruidPasswordCallback;
 import com.alibaba.druid.util.Histogram;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.MySqlUtils;
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.druid.util.Utils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * @author wenshao [szujobs@hotmail.com]
@@ -1435,8 +1433,8 @@ public abstract class DruidAbstractDataSource extends WrapperAdapter implements 
                     }
                 }
             } finally {
-                JdbcUtils.close(rs);
-                JdbcUtils.close(stmt);
+                WallDenyStat.JdbcUtils.close(rs);
+                WallDenyStat.JdbcUtils.close(stmt);
             }
         }
     }
@@ -1518,8 +1516,8 @@ public abstract class DruidAbstractDataSource extends WrapperAdapter implements 
                     return false;
                 }
             } finally {
-                JdbcUtils.close(rset);
-                JdbcUtils.close(stmt);
+                WallDenyStat.JdbcUtils.close(rset);
+                WallDenyStat.JdbcUtils.close(stmt);
             }
 
             if (onFatalError) {
@@ -1724,16 +1722,16 @@ public abstract class DruidAbstractDataSource extends WrapperAdapter implements 
             setCreateError(null);
         } catch (SQLException ex) {
             setCreateError(ex);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(conn);
             throw ex;
         } catch (RuntimeException ex) {
             setCreateError(ex);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(conn);
             throw ex;
         } catch (Error ex) {
             createErrorCountUpdater.incrementAndGet(this);
             setCreateError(ex);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(conn);
             throw ex;
         } finally {
             long nano = System.nanoTime() - connectStartNanos;
@@ -1854,7 +1852,7 @@ public abstract class DruidAbstractDataSource extends WrapperAdapter implements 
                             variables.put(name, value);
                         }
                     } finally {
-                        JdbcUtils.close(rs);
+                        WallDenyStat.JdbcUtils.close(rs);
                     }
                 }
 
@@ -1868,12 +1866,12 @@ public abstract class DruidAbstractDataSource extends WrapperAdapter implements 
                             globalVariables.put(name, value);
                         }
                     } finally {
-                        JdbcUtils.close(rs);
+                        WallDenyStat.JdbcUtils.close(rs);
                     }
                 }
             }
         } finally {
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
     }
 
@@ -2001,7 +1999,7 @@ public abstract class DruidAbstractDataSource extends WrapperAdapter implements 
         decrementCachedPreparedStatementCount();
         incrementCachedPreparedStatementDeleteCount();
 
-        JdbcUtils.close(stmtHolder.statement);
+        WallDenyStat.JdbcUtils.close(stmtHolder.statement);
     }
 
     protected void cloneTo(DruidAbstractDataSource to) {

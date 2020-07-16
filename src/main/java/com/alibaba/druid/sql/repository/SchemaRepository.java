@@ -61,7 +61,7 @@ import com.alibaba.druid.sql.visitor.SQLASTVisitorAdapter;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * Created by wenshao on 03/06/2017.
@@ -282,13 +282,13 @@ public class SchemaRepository {
         int optionsValue = SchemaResolveVisitor.Option.of(options);
 
         SchemaResolveVisitor resolveVisitor;
-        if (JdbcUtils.isMysqlDbType(dbType) || JdbcConstants.SQLITE.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType) || JdbcConstants.SQLITE.equals(dbType)) {
             resolveVisitor = new SchemaResolveVisitorFactory.MySqlResolveVisitor(this, optionsValue);
-        } else if (JdbcUtils.isOracleDbType(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             resolveVisitor = new SchemaResolveVisitorFactory.OracleResolveVisitor(this, optionsValue);
-        } else if (JdbcUtils.isPgsqlDbType(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)) {
             resolveVisitor = new SchemaResolveVisitorFactory.PGResolveVisitor(this, optionsValue);
-        } else if (JdbcUtils.isSqlserverDbType(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             resolveVisitor = new SchemaResolveVisitorFactory.SQLServerResolveVisitor(this, optionsValue);
         } else if (JdbcConstants.DB2.equals(dbType)) {
             resolveVisitor = new SchemaResolveVisitorFactory.DB2ResolveVisitor(this, optionsValue);

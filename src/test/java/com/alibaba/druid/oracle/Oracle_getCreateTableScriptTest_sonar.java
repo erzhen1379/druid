@@ -2,7 +2,7 @@ package com.alibaba.druid.oracle;
 
 import com.alibaba.druid.DbTestCase;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import java.sql.Connection;
 import java.util.Collections;
@@ -23,9 +23,9 @@ public class Oracle_getCreateTableScriptTest_sonar extends DbTestCase {
         //String createTableScript = JdbcUtils.getCreateTableScript(conn, JdbcConstants.ORACLE);
         //System.out.println(createTableScript);
 
-        List<String> tables = JdbcUtils.showTables(conn, JdbcConstants.ORACLE);
+        List<String> tables = WallDenyStat.JdbcUtils.showTables(conn, JdbcConstants.ORACLE);
         for (String table : tables) {
-            Object cnt = JdbcUtils.executeQuery(conn, "select count(*) CNT from " + table, Collections.emptyList())
+            Object cnt = WallDenyStat.JdbcUtils.executeQuery(conn, "select count(*) CNT from " + table, Collections.emptyList())
                     .get(0)
                     .get("CNT");
             System.out.println(table + " : " + cnt);

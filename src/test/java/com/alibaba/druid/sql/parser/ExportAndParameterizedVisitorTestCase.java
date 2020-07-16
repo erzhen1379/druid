@@ -15,6 +15,7 @@
  */
 package com.alibaba.druid.sql.parser;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -24,7 +25,6 @@ import com.alibaba.druid.sql.visitor.ExportParameterVisitor;
 import com.alibaba.druid.sql.visitor.ExportParameterVisitorUtils;
 import com.alibaba.druid.sql.visitor.ParameterizedVisitor;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class ExportAndParameterizedVisitorTestCase extends TestCase {
 
@@ -36,7 +36,7 @@ public class ExportAndParameterizedVisitorTestCase extends TestCase {
                 { "update tab01 set d='d1' where a=1 and b='b1'", 3, "d1" },
                 { "delete from tab01 where a=1 and b='b1'", 2, 1.0 } };
 
-        String[] dbTypes = { "mysql", "oracle", "db2" ,JdbcConstants.POSTGRESQL,JdbcUtils.JTDS,"not-found"};
+        String[] dbTypes = { "mysql", "oracle", "db2" ,JdbcConstants.POSTGRESQL, WallDenyStat.JdbcUtils.JTDS,"not-found"};
     // String[]  dbTypes = { JdbcUtils.JTDS};
         for (String dbType : dbTypes) {
 

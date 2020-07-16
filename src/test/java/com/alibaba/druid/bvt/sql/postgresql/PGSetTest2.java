@@ -20,7 +20,7 @@ import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.postgresql.parser.PGSQLStatementParser;
 import com.alibaba.druid.sql.dialect.postgresql.visitor.PGSchemaStatVisitor;
 import com.alibaba.druid.sql.visitor.ParameterizedOutputVisitorUtils;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class PGSetTest2 extends PGTest {
 
         Assert.assertEquals(0, visitor.getColumns().size());
 
-        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.POSTGRESQL);
+        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.POSTGRESQL);
         assertEquals("SET search_path = \"public\",\"$user\", public", mergedSql);
     }
 

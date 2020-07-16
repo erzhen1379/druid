@@ -1,15 +1,12 @@
 package com.alibaba.druid.oracle;
 
 import com.alibaba.druid.DbTestCase;
-import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by wenshao on 23/07/2017.
@@ -30,13 +27,13 @@ public class Oracle_PSCacheTest extends DbTestCase {
                 pstmt = conn.prepareStatement("select * from t1 where f0 = ?");
                 pstmt.setString(1, "3");
                 rs = pstmt.executeQuery();
-                JdbcUtils.printResultSet(rs);
+                WallDenyStat.JdbcUtils.printResultSet(rs);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                 JdbcUtils.close(rs);
-                 JdbcUtils.close(pstmt);
-                 JdbcUtils.close(conn);
+                 WallDenyStat.JdbcUtils.close(rs);
+                 WallDenyStat.JdbcUtils.close(pstmt);
+                 WallDenyStat.JdbcUtils.close(conn);
             }
 
             Thread.sleep(3000);

@@ -5,12 +5,12 @@ import java.sql.Connection;
 import java.sql.Types;
 import java.util.Collections;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.filter.FilterAdapter;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class FilterChainImplTest2 extends TestCase {
 
@@ -28,7 +28,7 @@ public class FilterChainImplTest2 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
     
     public void test_getURL() throws Exception {

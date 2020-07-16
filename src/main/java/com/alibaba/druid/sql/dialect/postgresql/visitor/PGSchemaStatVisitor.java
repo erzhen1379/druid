@@ -46,8 +46,8 @@ import com.alibaba.druid.sql.visitor.SchemaStatVisitor;
 import com.alibaba.druid.stat.TableStat;
 import com.alibaba.druid.stat.TableStat.Mode;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.PGUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class PGSchemaStatVisitor extends SchemaStatVisitor implements PGASTVisitor {
     public PGSchemaStatVisitor() {
@@ -56,7 +56,7 @@ public class PGSchemaStatVisitor extends SchemaStatVisitor implements PGASTVisit
 
     @Override
     public String getDbType() {
-        return JdbcUtils.POSTGRESQL;
+        return WallDenyStat.JdbcUtils.POSTGRESQL;
     }
 
     @Override

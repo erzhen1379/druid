@@ -2,11 +2,11 @@ package com.alibaba.druid.bvt.pool;
 
 import java.sql.SQLException;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 /**
  * @author Jonas Yang
@@ -26,7 +26,7 @@ public class DruidDataSourceDecryptTest {
             dataSource.init();
             Assert.assertEquals("The password is " + dataSource.getPassword(), "xiaoyu", dataSource.getPassword());
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 }

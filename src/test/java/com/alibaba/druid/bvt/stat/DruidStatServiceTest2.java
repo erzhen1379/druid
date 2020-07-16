@@ -18,7 +18,7 @@ package com.alibaba.druid.bvt.stat;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.stat.DruidStatService;
 import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import java.sql.Connection;
@@ -60,8 +60,8 @@ public class DruidStatServiceTest2 extends TestCase {
     }
 
     public void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
-        JdbcUtils.close(dataSource2);
+        WallDenyStat.JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource2);
     }
 
     public void test_statService_getSqlList() throws Exception {

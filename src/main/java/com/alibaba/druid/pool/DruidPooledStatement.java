@@ -19,7 +19,6 @@ import java.net.SocketTimeoutException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLFeatureNotSupportedException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ import com.alibaba.druid.VERSION;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.MySqlUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * @author wenshao [szujobs@hotmail.com]
@@ -156,8 +155,8 @@ public class DruidPooledStatement extends PoolableWrapper implements Statement {
         } catch (Exception ex) {
             LOG.warn(killQuery + " error.", ex);
         } finally {
-            JdbcUtils.close(killQueryStmt);
-            JdbcUtils.close(killQueryConn);
+            WallDenyStat.JdbcUtils.close(killQueryStmt);
+            WallDenyStat.JdbcUtils.close(killQueryConn);
         }
     }
 

@@ -26,13 +26,13 @@ import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Savepoint;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class ConnectionTest extends TestCase {
 
@@ -150,38 +150,38 @@ public class ConnectionTest extends TestCase {
                 } catch (SQLFeatureNotSupportedException ex) {
                 }
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.getBinaryStream(2).close();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.getBinaryStream("DATA").close();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.getBytes(2);
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.getBytes("DATA");
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             conn.setAutoCommit(true);
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(pstmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 }

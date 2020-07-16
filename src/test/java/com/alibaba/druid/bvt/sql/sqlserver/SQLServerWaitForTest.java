@@ -17,6 +17,7 @@ package com.alibaba.druid.bvt.sql.sqlserver;
 
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -24,7 +25,6 @@ import org.junit.Assert;
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.sqlserver.parser.SQLServerStatementParser;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class SQLServerWaitForTest extends TestCase {
 
@@ -36,7 +36,7 @@ public class SQLServerWaitForTest extends TestCase {
 
         Assert.assertEquals(1, stmtList.size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("WAITFOR TIME '22:20';", text);
     }
@@ -49,7 +49,7 @@ public class SQLServerWaitForTest extends TestCase {
 
         Assert.assertEquals(1, stmtList.size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("WAITFOR DELAY '02:00';", text);
     }

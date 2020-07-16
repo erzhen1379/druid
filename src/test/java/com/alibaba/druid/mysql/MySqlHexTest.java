@@ -19,10 +19,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class MySqlHexTest extends TestCase {
     final int COUNT = 800;
@@ -59,7 +59,7 @@ public class MySqlHexTest extends TestCase {
         PreparedStatement stmt = conn.prepareStatement(sql);
 
         ResultSet rs = stmt.executeQuery();
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
         rs.close();
         stmt.close();
 

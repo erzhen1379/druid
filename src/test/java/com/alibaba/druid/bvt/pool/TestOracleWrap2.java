@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -27,7 +28,6 @@ import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.druid.pool.DruidPooledPreparedStatement;
 import com.alibaba.druid.pool.DruidPooledResultSet;
 import com.alibaba.druid.test.util.OracleMockDriverJdbc3;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestOracleWrap2 extends TestCase {
 
@@ -46,7 +46,7 @@ public class TestOracleWrap2 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_oracle() throws Exception {

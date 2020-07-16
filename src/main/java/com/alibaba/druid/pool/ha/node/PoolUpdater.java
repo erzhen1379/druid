@@ -20,7 +20,7 @@ import com.alibaba.druid.pool.ha.DataSourceCreator;
 import com.alibaba.druid.pool.ha.HighAvailableDataSource;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import javax.sql.DataSource;
 import java.util.HashSet;
@@ -204,7 +204,7 @@ public class PoolUpdater implements Observer {
             LOG.info("Creating Node " + nodeName + "[url: " + url + ", username: " + username + "].");
         } catch (Exception e) {
             LOG.error("Can NOT create DataSource " + nodeName + ". IGNORE IT.", e);
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 

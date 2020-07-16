@@ -9,6 +9,7 @@ package com.alibaba.druid.bvt.sql.sqlserver;
 
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -16,7 +17,6 @@ import org.junit.Assert;
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.sqlserver.parser.SQLServerStatementParser;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class SQLServerDeclareTest extends TestCase {
 
@@ -28,7 +28,7 @@ public class SQLServerDeclareTest extends TestCase {
 
         Assert.assertEquals(1, stmtList.size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("DECLARE @is_updated bit", text);
     }
@@ -41,7 +41,7 @@ public class SQLServerDeclareTest extends TestCase {
 
         Assert.assertEquals(1, stmtList.size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("DECLARE @Group nvarchar(50), @Sales money = 1;", text);
     }
@@ -54,7 +54,7 @@ public class SQLServerDeclareTest extends TestCase {
 
         Assert.assertEquals(1, stmtList.size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("DECLARE @cursor CURSOR", text);
     }
@@ -67,7 +67,7 @@ public class SQLServerDeclareTest extends TestCase {
 
         Assert.assertEquals(1, stmtList.size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         String expected = "DECLARE @MyTableVar TABLE ("//
                           + "\n\tEmpID int NOT NULL,"//

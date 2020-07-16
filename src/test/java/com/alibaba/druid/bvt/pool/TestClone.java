@@ -20,12 +20,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.alibaba.druid.PoolTestCase;
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
-import junit.framework.TestCase;
 
 import com.alibaba.druid.mock.MockConnection;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 
 public class TestClone extends PoolTestCase {
@@ -109,7 +108,7 @@ public class TestClone extends PoolTestCase {
     }
     
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
         super.tearDown();
     }
 }
