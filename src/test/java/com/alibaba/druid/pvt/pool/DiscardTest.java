@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -14,7 +15,6 @@ import com.alibaba.druid.mock.MockDriver;
 import com.alibaba.druid.mock.MockStatementBase;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.vendor.MySqlExceptionSorter;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DiscardTest extends TestCase {
 
@@ -121,9 +121,9 @@ public class DiscardTest extends TestCase {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 }

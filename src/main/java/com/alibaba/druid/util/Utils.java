@@ -15,6 +15,8 @@
  */
 package com.alibaba.druid.util;
 
+import com.alibaba.druid.wall.WallDenyStat;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -62,7 +64,7 @@ public class Utils {
             String text = Utils.read(in);
             return text;
         } finally {
-            JdbcUtils.close(in);
+            WallDenyStat.JdbcUtils.close(in);
         }
     }
 
@@ -76,7 +78,7 @@ public class Utils {
 
             return readByteArray(in);
         } finally {
-            JdbcUtils.close(in);
+            WallDenyStat.JdbcUtils.close(in);
         }
     }
 
@@ -449,8 +451,8 @@ public static long murmurhash2_64(final byte[] data, int length, int seed) {
         } catch (Exception ex) {
             // skip
         } finally {
-            JdbcUtils.close(is);
-            JdbcUtils.close(reader);
+            WallDenyStat.JdbcUtils.close(is);
+            WallDenyStat.JdbcUtils.close(reader);
         }
     }
 

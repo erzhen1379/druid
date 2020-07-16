@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -31,7 +32,6 @@ import com.alibaba.druid.mock.MockStatementBase;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.druid.proxy.jdbc.ConnectionProxy;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class EncodingConvertFilterTest extends TestCase {
 
@@ -67,7 +67,7 @@ public class EncodingConvertFilterTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_stat() throws Exception {

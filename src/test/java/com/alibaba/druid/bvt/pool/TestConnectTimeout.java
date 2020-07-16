@@ -21,11 +21,11 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestConnectTimeout extends TestCase {
 
@@ -89,6 +89,6 @@ public class TestConnectTimeout extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 }

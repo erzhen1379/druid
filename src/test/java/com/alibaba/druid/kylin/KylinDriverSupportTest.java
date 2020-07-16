@@ -2,7 +2,7 @@ package com.alibaba.druid.kylin;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
 import org.junit.Assert;
@@ -26,7 +26,7 @@ public class KylinDriverSupportTest {
 
     @Test
     public void testDriverClassName() throws SQLException {
-        String driverClass = JdbcUtils.getDriverClassName(URL);
+        String driverClass = WallDenyStat.JdbcUtils.getDriverClassName(URL);
         Assert.assertThat("check get driverClassName", driverClass, Is.is(JdbcConstants.KYLIN_DRIVER));
     }
 

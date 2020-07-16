@@ -3,10 +3,9 @@ package com.alibaba.druid.bvt.pool.exception;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.druid.pool.vendor.OceanBaseOracleExceptionSorter;
-import com.alibaba.druid.pool.vendor.OracleExceptionSorter;
 import com.alibaba.druid.stat.JdbcStatManager;
 import com.alibaba.druid.test.util.OracleMockDriver;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 import org.junit.Assert;
 
@@ -33,7 +32,7 @@ public class OceanBaseOracleExceptionSorterTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_connect() throws Exception {

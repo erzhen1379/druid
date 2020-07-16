@@ -20,10 +20,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class OnlineOracleTest3 extends TestCase {
 
@@ -62,12 +62,12 @@ public class OnlineOracleTest3 extends TestCase {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
-            JdbcUtils.printResultSet(rs);
+            WallDenyStat.JdbcUtils.printResultSet(rs);
 
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -81,8 +81,8 @@ public class OnlineOracleTest3 extends TestCase {
             stmt.execute(sql);
 
         } finally {
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 }

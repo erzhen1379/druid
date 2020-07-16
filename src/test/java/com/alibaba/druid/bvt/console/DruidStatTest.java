@@ -7,16 +7,12 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.console.DruidStat;
 import com.alibaba.druid.support.console.Option;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DruidStatTest extends TestCase {
 
@@ -36,9 +32,9 @@ public class DruidStatTest extends TestCase {
         dataSource.setFilters("stat");
         dataSource.setRemoveAbandoned(true);
         dataSource.setRemoveAbandonedTimeout(600);
-        JdbcUtils.execute(dataSource, "CREATE TABLE user (id INT, name VARCHAR(40))");
-        JdbcUtils.execute(dataSource, "insert into user values(20,'name1')");
-        JdbcUtils.execute(dataSource, "insert into user values(30,'name2')");
+        WallDenyStat.JdbcUtils.execute(dataSource, "CREATE TABLE user (id INT, name VARCHAR(40))");
+        WallDenyStat.JdbcUtils.execute(dataSource, "insert into user values(20,'name1')");
+        WallDenyStat.JdbcUtils.execute(dataSource, "insert into user values(30,'name2')");
 
         dataSource2 = new DruidDataSource();
         dataSource2.setMinIdle(1);
@@ -48,17 +44,17 @@ public class DruidStatTest extends TestCase {
         dataSource2.setRemoveAbandoned(true);
         dataSource2.setRemoveAbandonedTimeout(600);
 
-        JdbcUtils.execute(dataSource2, "CREATE TABLE user (id INT, name VARCHAR(40))");
-        JdbcUtils.execute(dataSource2, "insert into user values(20,'name1')");
+        WallDenyStat.JdbcUtils.execute(dataSource2, "CREATE TABLE user (id INT, name VARCHAR(40))");
+        WallDenyStat.JdbcUtils.execute(dataSource2, "insert into user values(20,'name1')");
 
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.execute(dataSource, "DROP TABLE user");
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.execute(dataSource, "DROP TABLE user");
+        WallDenyStat.JdbcUtils.close(dataSource);
 
-        JdbcUtils.execute(dataSource2, "DROP TABLE user");
-        JdbcUtils.close(dataSource2);
+        WallDenyStat.JdbcUtils.execute(dataSource2, "DROP TABLE user");
+        WallDenyStat.JdbcUtils.close(dataSource2);
     }
 
     public void test_printDruidStat() throws Exception {

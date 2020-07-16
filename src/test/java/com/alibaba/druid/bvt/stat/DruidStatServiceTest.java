@@ -27,6 +27,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -45,7 +46,6 @@ import com.alibaba.druid.stat.spring.UserService;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.support.http.stat.WebAppStatManager;
 import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DruidStatServiceTest extends TestCase {
 
@@ -69,7 +69,7 @@ public class DruidStatServiceTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_statService_getSqlList() throws Exception {

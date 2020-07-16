@@ -4,8 +4,7 @@ import com.alibaba.druid.PoolTestCase;
 import com.alibaba.druid.mock.MockConnection;
 import com.alibaba.druid.mock.MockDriver;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
-import org.junit.Assert;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -44,7 +43,7 @@ public class CreateSchedulerTest_directCreate extends PoolTestCase {
 
     protected void tearDown() throws Exception {
         for (int i = 0; i < dataSources.length; ++i) {
-            JdbcUtils.close(dataSources[i]);
+            WallDenyStat.JdbcUtils.close(dataSources[i]);
         }
 
         createScheduler.shutdown();
@@ -101,7 +100,7 @@ public class CreateSchedulerTest_directCreate extends PoolTestCase {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     } finally {
-                        JdbcUtils.close(conn);
+                        WallDenyStat.JdbcUtils.close(conn);
                     }
                 }
             } finally {

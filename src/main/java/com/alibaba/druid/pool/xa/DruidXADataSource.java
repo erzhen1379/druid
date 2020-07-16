@@ -27,10 +27,10 @@ import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.H2Utils;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.MySqlUtils;
 import com.alibaba.druid.util.OracleUtils;
 import com.alibaba.druid.util.PGUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class DruidXADataSource extends DruidDataSource implements XADataSource {
 
@@ -54,13 +54,13 @@ public class DruidXADataSource extends DruidDataSource implements XADataSource {
     protected void initCheck() throws SQLException {
         super.initCheck();
 
-        if (JdbcUtils.H2.equals(this.dbType)) {
+        if (WallDenyStat.JdbcUtils.H2.equals(this.dbType)) {
             h2Factory = H2Utils.createJdbcDataSourceFactory();
         }
     }
 
     private XAConnection createPhysicalXAConnection(Connection physicalConn) throws SQLException {
-        if (JdbcUtils.ORACLE.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.ORACLE.equals(dbType)) {
             try {
                 return OracleUtils.OracleXAConnection(physicalConn);
             } catch (XAException xae) {
@@ -69,19 +69,19 @@ public class DruidXADataSource extends DruidDataSource implements XADataSource {
             }
         }
 
-        if (JdbcUtils.MYSQL.equals(dbType) || JdbcUtils.MARIADB.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.MYSQL.equals(dbType) || WallDenyStat.JdbcUtils.MARIADB.equals(dbType)) {
             return MySqlUtils.createXAConnection(driver, physicalConn);
         }
 
-        if (JdbcUtils.POSTGRESQL.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.POSTGRESQL.equals(dbType)) {
             return PGUtils.createXAConnection(physicalConn);
         }
 
-        if (JdbcUtils.H2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.H2.equals(dbType)) {
             return H2Utils.createXAConnection(h2Factory, physicalConn);
         }
 
-        if (JdbcUtils.JTDS.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.JTDS.equals(dbType)) {
             return new JtdsXAConnection(physicalConn);
         }
 

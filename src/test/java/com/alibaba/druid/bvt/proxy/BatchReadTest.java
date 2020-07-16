@@ -22,13 +22,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class BatchReadTest extends TestCase {
 
@@ -91,8 +91,8 @@ public class BatchReadTest extends TestCase {
 
                 if (moreResults) {
                     rs = stmt.getResultSet();
-                    JdbcUtils.printResultSet(rs, System.out);
-                    JdbcUtils.close(rs);
+                    WallDenyStat.JdbcUtils.printResultSet(rs, System.out);
+                    WallDenyStat.JdbcUtils.close(rs);
                     continue;
                 }
 
@@ -103,9 +103,9 @@ public class BatchReadTest extends TestCase {
             }
 
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -140,7 +140,7 @@ public class BatchReadTest extends TestCase {
             pstmt.setFetchDirection(stmt.getFetchDirection());
             pstmt.setFetchSize(pstmt.getFetchSize());
             ResultSet keys = stmt.getGeneratedKeys();
-            JdbcUtils.close(keys);
+            WallDenyStat.JdbcUtils.close(keys);
 
             // just call
             stmt.getConnection();
@@ -164,8 +164,8 @@ public class BatchReadTest extends TestCase {
                 rs.getWarnings();
 
                 if (rs != null) {
-                    JdbcUtils.printResultSet(rs, System.out);
-                    JdbcUtils.close(rs);
+                    WallDenyStat.JdbcUtils.printResultSet(rs, System.out);
+                    WallDenyStat.JdbcUtils.close(rs);
                 }
 
                 if ((stmt.getMoreResults() == false) && (stmt.getUpdateCount() == -1)) {
@@ -173,10 +173,10 @@ public class BatchReadTest extends TestCase {
                 }
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(pstmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 }

@@ -15,11 +15,11 @@
  */
 package com.alibaba.druid.bvt.sql.mysql;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class MySqlFormatTest extends TestCase {
 
@@ -29,6 +29,6 @@ public class MySqlFormatTest extends TestCase {
                             "\ta INT,\n" + //
                             "\tb CHAR(20),\n" + //
                             "\tINDEX(a)\n" + //
-                            ");", SQLUtils.format(text, JdbcUtils.MYSQL));
+                            ");", SQLUtils.format(text, WallDenyStat.JdbcUtils.MYSQL));
     }
 }

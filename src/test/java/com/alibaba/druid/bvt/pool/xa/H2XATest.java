@@ -18,10 +18,9 @@ package com.alibaba.druid.bvt.pool.xa;
 import javax.sql.XAConnection;
 
 import com.alibaba.druid.PoolTestCase;
-import junit.framework.TestCase;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import com.alibaba.druid.pool.xa.DruidXADataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class H2XATest extends PoolTestCase {
 
@@ -35,13 +34,13 @@ public class H2XATest extends PoolTestCase {
         dataSource.setUrl("jdbc:h2:mem:test;");
         dataSource.setTestOnBorrow(false);
 
-        JdbcUtils.execute(dataSource, "CREATE TABLE user (id INT, name VARCHAR(40))");
+        WallDenyStat.JdbcUtils.execute(dataSource, "CREATE TABLE user (id INT, name VARCHAR(40))");
 
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.execute(dataSource, "DROP TABLE user");
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.execute(dataSource, "DROP TABLE user");
+        WallDenyStat.JdbcUtils.close(dataSource);
 
         super.tearDown();
     }

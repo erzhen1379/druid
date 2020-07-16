@@ -20,10 +20,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
-
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestRollBack extends TestCase {
 
@@ -56,7 +55,7 @@ public class TestRollBack extends TestCase {
         } catch (Exception e) {
             conn.rollback();
         } finally {
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(conn);
         }
 
         Assert.assertEquals(0, count());
@@ -73,9 +72,9 @@ public class TestRollBack extends TestCase {
             rs.next();
             return rs.getInt(1);
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -90,7 +89,7 @@ public class TestRollBack extends TestCase {
             stmt.setString(2, value);
             stmt.execute();
         } finally {
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
     }
 

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -16,7 +17,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.proxy.jdbc.ClobProxyImpl;
 import com.alibaba.druid.proxy.jdbc.ResultSetProxy;
 import com.alibaba.druid.stat.JdbcSqlStat;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class StatFilterOpenClobCountTest2 extends TestCase {
 
@@ -62,7 +62,7 @@ public class StatFilterOpenClobCountTest2 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_stat() throws Exception {

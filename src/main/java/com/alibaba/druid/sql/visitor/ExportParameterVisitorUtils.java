@@ -36,7 +36,7 @@ import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlExportParameterVisitor;
 import com.alibaba.druid.sql.dialect.oracle.visitor.OracleExportParameterVisitor;
 import com.alibaba.druid.sql.dialect.postgresql.visitor.PGExportParameterVisitor;
 import com.alibaba.druid.sql.dialect.sqlserver.visitor.MSSQLServerExportParameterVisitor;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public final class ExportParameterVisitorUtils {
     
@@ -47,41 +47,41 @@ public final class ExportParameterVisitorUtils {
 
     public static ExportParameterVisitor createExportParameterVisitor(final  Appendable out ,final String dbType) {
         
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlExportParameterVisitor(out);
         }
 
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleExportParameterVisitor(out);
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)) {
             return new PGExportParameterVisitor(out);
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new MSSQLServerExportParameterVisitor(out);
         }
 
-        if (JdbcUtils.DB2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2ExportParameterVisitor(out);
         }
         
-        if (JdbcUtils.MARIADB.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.MARIADB.equals(dbType)) {
             return new MySqlExportParameterVisitor(out);
         }
         
-        if (JdbcUtils.H2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.H2.equals(dbType)) {
             return new MySqlExportParameterVisitor(out);
         }
 
-        if (JdbcUtils.POSTGRESQL.equals(dbType)
-                || JdbcUtils.ENTERPRISEDB.equals(dbType)
-                || JdbcUtils.POLARDB.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.POSTGRESQL.equals(dbType)
+                || WallDenyStat.JdbcUtils.ENTERPRISEDB.equals(dbType)
+                || WallDenyStat.JdbcUtils.POLARDB.equals(dbType)) {
             return new PGExportParameterVisitor(out);
         }
 
-        if (JdbcUtils.SQL_SERVER.equals(dbType) || JdbcUtils.JTDS.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.SQL_SERVER.equals(dbType) || WallDenyStat.JdbcUtils.JTDS.equals(dbType)) {
             return new MSSQLServerExportParameterVisitor(out);
         }
        return new ExportParameterizedOutputVisitor(out);

@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -40,7 +41,6 @@ import com.alibaba.druid.mock.MockStatementBase;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.stat.JdbcSqlStat;
 import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class StatFilterBuildSlowParameterTest extends TestCase {
 
@@ -72,7 +72,7 @@ public class StatFilterBuildSlowParameterTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_buildSlowSql() throws Exception {

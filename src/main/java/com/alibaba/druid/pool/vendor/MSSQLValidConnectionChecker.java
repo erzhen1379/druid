@@ -22,7 +22,7 @@ import java.sql.Statement;
 
 import com.alibaba.druid.pool.ValidConnectionChecker;
 import com.alibaba.druid.pool.ValidConnectionCheckerAdapter;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * A MSSQLValidConnectionChecker.
@@ -52,7 +52,7 @@ public class MSSQLValidConnectionChecker extends ValidConnectionCheckerAdapter i
         } catch (SQLException e) {
             throw e;
         } finally {
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
     }
 

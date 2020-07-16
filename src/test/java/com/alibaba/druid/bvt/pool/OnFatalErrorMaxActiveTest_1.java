@@ -4,7 +4,7 @@ import com.alibaba.druid.PoolTestCase;
 import com.alibaba.druid.pool.DruidAbstractDataSource;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -23,7 +23,7 @@ public class OnFatalErrorMaxActiveTest_1 extends PoolTestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_for_fatalError() throws Exception {

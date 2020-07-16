@@ -17,6 +17,7 @@ package com.alibaba.druid.bvt.sql.sqlserver.select;
 
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -28,7 +29,6 @@ import com.alibaba.druid.sql.ast.statement.SQLSelectStatement;
 import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerSelectQueryBlock;
 import com.alibaba.druid.sql.dialect.sqlserver.parser.SQLServerStatementParser;
 import com.alibaba.druid.sql.dialect.sqlserver.visitor.SQLServerSchemaStatVisitor;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class SQLServerSelectTest_outer_apply extends TestCase {
 
@@ -46,7 +46,7 @@ public class SQLServerSelectTest_outer_apply extends TestCase {
         SQLServerSelectQueryBlock queryBlock = (SQLServerSelectQueryBlock) select.getQuery();
         Assert.assertNull(queryBlock.getGroupBy());
 
-        String fomatSQL = SQLUtils.toSQLString(statementList, JdbcUtils.SQL_SERVER);
+        String fomatSQL = SQLUtils.toSQLString(statementList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
 //        System.out.println(fomatSQL);
 

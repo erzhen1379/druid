@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PolarDBDataSourceTest extends TestCase {
 
@@ -44,8 +44,8 @@ public class PolarDBDataSourceTest extends TestCase {
         while(rs.next()) {
 
         }
-        JdbcUtils.close(rs);
-        JdbcUtils.close(stmt);
-        JdbcUtils.close(conn);
+        WallDenyStat.JdbcUtils.close(rs);
+        WallDenyStat.JdbcUtils.close(stmt);
+        WallDenyStat.JdbcUtils.close(conn);
     }
 }

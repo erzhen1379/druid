@@ -1,9 +1,8 @@
 package com.alibaba.druid.oracle;
 
 import com.alibaba.druid.DbTestCase;
-import com.alibaba.druid.benckmark.proxy.BenchmarkExecutor;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.OracleUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import java.sql.*;
 
@@ -22,7 +21,7 @@ public class Oracle_PSCacheTest2 extends DbTestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(connDDL);
+        WallDenyStat.JdbcUtils.close(connDDL);
     }
 
     public void test_oracle() throws Exception {
@@ -46,7 +45,7 @@ public class Oracle_PSCacheTest2 extends DbTestCase {
         executeQuery(pstmt);
         dropColumn();
 
-        JdbcUtils.close(conn);
+        WallDenyStat.JdbcUtils.close(conn);
 
     }
 
@@ -56,9 +55,9 @@ public class Oracle_PSCacheTest2 extends DbTestCase {
             pstmt.clearParameters();
             pstmt.setString(1, "3");
             rs = pstmt.executeQuery();
-            JdbcUtils.printResultSet(rs);
+            WallDenyStat.JdbcUtils.printResultSet(rs);
         } finally {
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
         }
     }
 

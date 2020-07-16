@@ -21,11 +21,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 import oracle.jdbc.OracleConnection;
 import oracle.jdbc.OraclePreparedStatement;
 
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.OracleUtils;
 
 public class TestOraclePreparedStatement extends TestCase {
@@ -46,7 +46,7 @@ public class TestOraclePreparedStatement extends TestCase {
         password = "deYcR7facWSJtCuDpm2r";
         SQL = "SELECT * FROM AV_INFO WHERE ID = ?";
 
-        Class.forName(JdbcUtils.getDriverClassName(jdbcUrl));
+        Class.forName(WallDenyStat.JdbcUtils.getDriverClassName(jdbcUrl));
     }
 
     public void createTable() throws Exception {

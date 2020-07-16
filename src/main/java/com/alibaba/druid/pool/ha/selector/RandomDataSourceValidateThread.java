@@ -34,8 +34,8 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.proxy.jdbc.DataSourceProxy;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.StringUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * A Thread trying to test all DataSource provided by HADataSource.
@@ -249,7 +249,7 @@ public class RandomDataSourceValidateThread implements Runnable {
                     + info.getProperty("user") + "]. Exception: " + e.getMessage());
             result = false;
         } finally {
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(conn);
         }
 
         return result;

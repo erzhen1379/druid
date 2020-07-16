@@ -24,13 +24,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.proxy.jdbc.ClobProxy;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class ClobTest extends TestCase {
 
@@ -124,19 +124,19 @@ public class ClobTest extends TestCase {
                 readClob.truncate(2);
                 readClob.free();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
                 rs.getCharacterStream(2).close();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
                 rs.getCharacterStream("DATA").close();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
@@ -146,19 +146,19 @@ public class ClobTest extends TestCase {
                 x.position(searchstr, 1);
                 x.free();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
                 rs.getAsciiStream(2).close();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
                 rs.getAsciiStream("DATA").close();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
@@ -166,7 +166,7 @@ public class ClobTest extends TestCase {
                 x.setString(1, "XXSDDSLF");
                 rs.updateClob(2, x);
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
@@ -174,13 +174,13 @@ public class ClobTest extends TestCase {
                 x.setString(1, "XXSDDSLF");
                 rs.updateClob("DATA", x);
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
                 rs.updateClob(2, new StringReader("XDSFLA"));
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
@@ -191,18 +191,18 @@ public class ClobTest extends TestCase {
             while (rs.next()) {
                 rs.updateClob(2, new StringReader("XDSFLA"), "XDSFLA".length());
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_CLOB");
             while (rs.next()) {
                 rs.updateClob("DATA", new StringReader("XDSFLA"), "XDSFLA".length());
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(pstmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 

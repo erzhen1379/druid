@@ -34,8 +34,8 @@ import com.alibaba.druid.proxy.jdbc.StatementProxy;
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.SQLUtils.FormatOption;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.MySqlUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * @author wenshao [szujobs@hotmail.com]
@@ -856,7 +856,7 @@ public abstract class LogFilter extends FilterEventAdapter implements LogFilterM
                         continue;
                     }
                     int sqlType = parameter.getSqlType();
-                    buf.append(JdbcUtils.getTypeName(sqlType));
+                    buf.append(WallDenyStat.JdbcUtils.getTypeName(sqlType));
                 }
                 buf.append("]");
                 statementLog(buf.toString());

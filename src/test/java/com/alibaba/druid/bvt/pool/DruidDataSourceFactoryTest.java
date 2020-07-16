@@ -21,20 +21,20 @@ import javax.naming.Reference;
 import javax.naming.StringRefAddr;
 import javax.sql.DataSource;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DruidDataSourceFactoryTest extends TestCase {
 
     private DruidDataSource dataSource;
     
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_factory() throws Exception {

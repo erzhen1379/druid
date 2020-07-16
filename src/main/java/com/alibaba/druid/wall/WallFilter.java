@@ -55,7 +55,6 @@ import com.alibaba.druid.sql.ast.expr.SQLValuableExpr;
 import com.alibaba.druid.sql.ast.expr.SQLVariantRefExpr;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.ServletPathMatcher;
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.druid.wall.WallConfig.TenantCallBack;
@@ -121,42 +120,42 @@ public class WallFilter extends FilterAdapter implements WallFilterMBean {
             if (dataSource.getDbType() != null) {
                 this.dbType = dataSource.getDbType();
             } else {
-                this.dbType = JdbcUtils.getDbType(dataSource.getRawJdbcUrl(), "");
+                this.dbType = WallDenyStat.JdbcUtils.getDbType(dataSource.getRawJdbcUrl(), "");
             }
         }
 
         if (dbType == null) {
-            dbType = JdbcUtils.getDbType(dataSource.getUrl(), null);
+            dbType = WallDenyStat.JdbcUtils.getDbType(dataSource.getUrl(), null);
         }
 
-        if (JdbcUtils.isMysqlDbType(dbType) || //
-            JdbcUtils.PRESTO.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType) || //
+            WallDenyStat.JdbcUtils.PRESTO.equals(dbType)) {
             if (config == null) {
                 config = new WallConfig(MySqlWallProvider.DEFAULT_CONFIG_DIR);
             }
 
             provider = new MySqlWallProvider(config);
-        } else if (JdbcUtils.isOracleDbType(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             if (config == null) {
                 config = new WallConfig(OracleWallProvider.DEFAULT_CONFIG_DIR);
             }
 
             provider = new OracleWallProvider(config);
-        } else if (JdbcUtils.isSqlserverDbType(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             if (config == null) {
                 config = new WallConfig(SQLServerWallProvider.DEFAULT_CONFIG_DIR);
             }
 
             provider = new SQLServerWallProvider(config);
-        } else if (JdbcUtils.isPgsqlDbType(dbType)
-                || JdbcUtils.ENTERPRISEDB.equals(dbType)
-                || JdbcUtils.POLARDB.equals(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)
+                || WallDenyStat.JdbcUtils.ENTERPRISEDB.equals(dbType)
+                || WallDenyStat.JdbcUtils.POLARDB.equals(dbType)) {
             if (config == null) {
                 config = new WallConfig(PGWallProvider.DEFAULT_CONFIG_DIR);
             }
 
             provider = new PGWallProvider(config);
-        } else if (JdbcUtils.DB2.equals(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             if (config == null) {
                 config = new WallConfig(DB2WallProvider.DEFAULT_CONFIG_DIR);
             }

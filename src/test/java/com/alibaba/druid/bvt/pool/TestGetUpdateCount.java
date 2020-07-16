@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -27,7 +28,6 @@ import com.alibaba.druid.mock.MockConnection;
 import com.alibaba.druid.mock.MockDriver;
 import com.alibaba.druid.mock.MockPreparedStatement;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestGetUpdateCount extends TestCase {
 
@@ -54,7 +54,7 @@ public class TestGetUpdateCount extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_executeQuery() throws Exception {

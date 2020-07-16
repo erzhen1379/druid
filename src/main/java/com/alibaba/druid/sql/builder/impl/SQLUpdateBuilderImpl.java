@@ -31,8 +31,7 @@ import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlUpdateStatement;
 import com.alibaba.druid.sql.dialect.oracle.ast.stmt.OracleUpdateStatement;
 import com.alibaba.druid.sql.dialect.postgresql.ast.stmt.PGUpdateStatement;
 import com.alibaba.druid.sql.dialect.sqlserver.ast.stmt.SQLServerUpdateStatement;
-import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class SQLUpdateBuilderImpl extends SQLBuilderImpl implements SQLUpdateBuilder {
 
@@ -160,19 +159,19 @@ public class SQLUpdateBuilderImpl extends SQLBuilderImpl implements SQLUpdateBui
     }
 
     public SQLUpdateStatement createSQLUpdateStatement() {
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlUpdateStatement();    
         }
 
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleUpdateStatement();
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)) {
             return new PGUpdateStatement();
         }
         
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerUpdateStatement();
         }
         

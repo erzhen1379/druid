@@ -26,6 +26,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -37,7 +38,6 @@ import com.alibaba.druid.mock.MockStatement;
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
 import com.alibaba.druid.util.Utils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class JdbcUtilsTest extends TestCase {
     protected void tearDown() throws Exception {
@@ -104,89 +104,89 @@ public class JdbcUtilsTest extends TestCase {
             }
         };
 
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
     }
 
     public void test_close() throws Exception {
-        JdbcUtils.close((Connection) null);
-        JdbcUtils.close((Statement) null);
-        JdbcUtils.close((ResultSet) null);
+        WallDenyStat.JdbcUtils.close((Connection) null);
+        WallDenyStat.JdbcUtils.close((Statement) null);
+        WallDenyStat.JdbcUtils.close((ResultSet) null);
 
-        JdbcUtils.close(new MockConnection() {
-
-            @Override
-            public void close() throws SQLException {
-                throw new SQLException();
-            }
-        });
-        JdbcUtils.close(new MockStatement(null) {
+        WallDenyStat.JdbcUtils.close(new MockConnection() {
 
             @Override
             public void close() throws SQLException {
                 throw new SQLException();
             }
         });
-        JdbcUtils.close(new MockResultSet(null) {
+        WallDenyStat.JdbcUtils.close(new MockStatement(null) {
 
             @Override
             public void close() throws SQLException {
                 throw new SQLException();
             }
         });
-        JdbcUtils.close(new Closeable() {
+        WallDenyStat.JdbcUtils.close(new MockResultSet(null) {
+
+            @Override
+            public void close() throws SQLException {
+                throw new SQLException();
+            }
+        });
+        WallDenyStat.JdbcUtils.close(new Closeable() {
 
             @Override
             public void close() throws IOException {
                 throw new IOException();
             }
         });
-        JdbcUtils.close(new Closeable() {
+        WallDenyStat.JdbcUtils.close(new Closeable() {
 
             @Override
             public void close() throws IOException {
             }
         });
-        JdbcUtils.close((Closeable) null);
+        WallDenyStat.JdbcUtils.close((Closeable) null);
 
-        new JdbcUtils();
+        new WallDenyStat.JdbcUtils();
     }
 
     public void test_getTypeName() {
-        JdbcUtils.getTypeName(Types.ARRAY);
-        JdbcUtils.getTypeName(Types.BIGINT);
-        JdbcUtils.getTypeName(Types.BINARY);
-        JdbcUtils.getTypeName(Types.BIT);
-        JdbcUtils.getTypeName(Types.BLOB);
-        JdbcUtils.getTypeName(Types.BOOLEAN);
-        JdbcUtils.getTypeName(Types.CHAR);
-        JdbcUtils.getTypeName(Types.CLOB);
-        JdbcUtils.getTypeName(Types.DATALINK);
-        JdbcUtils.getTypeName(Types.DATE);
-        JdbcUtils.getTypeName(Types.DECIMAL);
-        JdbcUtils.getTypeName(Types.DISTINCT);
-        JdbcUtils.getTypeName(Types.DOUBLE);
-        JdbcUtils.getTypeName(Types.FLOAT);
-        JdbcUtils.getTypeName(Types.INTEGER);
-        JdbcUtils.getTypeName(Types.JAVA_OBJECT);
-        JdbcUtils.getTypeName(Types.LONGNVARCHAR);
-        JdbcUtils.getTypeName(Types.LONGVARBINARY);
-        JdbcUtils.getTypeName(Types.NCHAR);
-        JdbcUtils.getTypeName(Types.NCLOB);
-        JdbcUtils.getTypeName(Types.NULL);
-        JdbcUtils.getTypeName(Types.NUMERIC);
-        JdbcUtils.getTypeName(Types.NVARCHAR);
-        JdbcUtils.getTypeName(Types.REAL);
-        JdbcUtils.getTypeName(Types.REF);
-        JdbcUtils.getTypeName(Types.ROWID);
-        JdbcUtils.getTypeName(Types.SMALLINT);
-        JdbcUtils.getTypeName(Types.SQLXML);
-        JdbcUtils.getTypeName(Types.STRUCT);
-        JdbcUtils.getTypeName(Types.TIME);
-        JdbcUtils.getTypeName(Types.TIMESTAMP);
-        JdbcUtils.getTypeName(Types.TINYINT);
-        JdbcUtils.getTypeName(Types.VARBINARY);
-        JdbcUtils.getTypeName(Types.VARCHAR);
-        JdbcUtils.getTypeName(Types.OTHER);
+        WallDenyStat.JdbcUtils.getTypeName(Types.ARRAY);
+        WallDenyStat.JdbcUtils.getTypeName(Types.BIGINT);
+        WallDenyStat.JdbcUtils.getTypeName(Types.BINARY);
+        WallDenyStat.JdbcUtils.getTypeName(Types.BIT);
+        WallDenyStat.JdbcUtils.getTypeName(Types.BLOB);
+        WallDenyStat.JdbcUtils.getTypeName(Types.BOOLEAN);
+        WallDenyStat.JdbcUtils.getTypeName(Types.CHAR);
+        WallDenyStat.JdbcUtils.getTypeName(Types.CLOB);
+        WallDenyStat.JdbcUtils.getTypeName(Types.DATALINK);
+        WallDenyStat.JdbcUtils.getTypeName(Types.DATE);
+        WallDenyStat.JdbcUtils.getTypeName(Types.DECIMAL);
+        WallDenyStat.JdbcUtils.getTypeName(Types.DISTINCT);
+        WallDenyStat.JdbcUtils.getTypeName(Types.DOUBLE);
+        WallDenyStat.JdbcUtils.getTypeName(Types.FLOAT);
+        WallDenyStat.JdbcUtils.getTypeName(Types.INTEGER);
+        WallDenyStat.JdbcUtils.getTypeName(Types.JAVA_OBJECT);
+        WallDenyStat.JdbcUtils.getTypeName(Types.LONGNVARCHAR);
+        WallDenyStat.JdbcUtils.getTypeName(Types.LONGVARBINARY);
+        WallDenyStat.JdbcUtils.getTypeName(Types.NCHAR);
+        WallDenyStat.JdbcUtils.getTypeName(Types.NCLOB);
+        WallDenyStat.JdbcUtils.getTypeName(Types.NULL);
+        WallDenyStat.JdbcUtils.getTypeName(Types.NUMERIC);
+        WallDenyStat.JdbcUtils.getTypeName(Types.NVARCHAR);
+        WallDenyStat.JdbcUtils.getTypeName(Types.REAL);
+        WallDenyStat.JdbcUtils.getTypeName(Types.REF);
+        WallDenyStat.JdbcUtils.getTypeName(Types.ROWID);
+        WallDenyStat.JdbcUtils.getTypeName(Types.SMALLINT);
+        WallDenyStat.JdbcUtils.getTypeName(Types.SQLXML);
+        WallDenyStat.JdbcUtils.getTypeName(Types.STRUCT);
+        WallDenyStat.JdbcUtils.getTypeName(Types.TIME);
+        WallDenyStat.JdbcUtils.getTypeName(Types.TIMESTAMP);
+        WallDenyStat.JdbcUtils.getTypeName(Types.TINYINT);
+        WallDenyStat.JdbcUtils.getTypeName(Types.VARBINARY);
+        WallDenyStat.JdbcUtils.getTypeName(Types.VARCHAR);
+        WallDenyStat.JdbcUtils.getTypeName(Types.OTHER);
     }
 
     public void test_read() throws Exception {

@@ -1,10 +1,10 @@
 package com.alibaba.druid.bvt.filter;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class ReuseStatFilterTest extends TestCase {
 
@@ -32,7 +32,7 @@ public class ReuseStatFilterTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSourceA);
-        JdbcUtils.close(dataSourceB);
+        WallDenyStat.JdbcUtils.close(dataSourceA);
+        WallDenyStat.JdbcUtils.close(dataSourceB);
     }
 }

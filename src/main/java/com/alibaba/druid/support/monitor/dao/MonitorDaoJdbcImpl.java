@@ -48,13 +48,9 @@ import com.alibaba.druid.support.monitor.entity.MonitorApp;
 import com.alibaba.druid.support.monitor.entity.MonitorCluster;
 import com.alibaba.druid.support.monitor.entity.MonitorInstance;
 import com.alibaba.druid.support.spring.stat.SpringMethodStatValue;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.druid.util.Utils;
-import com.alibaba.druid.wall.WallFunctionStatValue;
-import com.alibaba.druid.wall.WallProviderStatValue;
-import com.alibaba.druid.wall.WallSqlStatValue;
-import com.alibaba.druid.wall.WallTableStatValue;
+import com.alibaba.druid.wall.*;
 
 public class MonitorDaoJdbcImpl implements MonitorDao {
 
@@ -102,7 +98,7 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
                 String text = Utils.readFromResource(path);
                 String[] sqls = text.split(";");
                 for (String sql : sqls) {
-                    JdbcUtils.execute(dataSource, sql);
+                    WallDenyStat.JdbcUtils.execute(dataSource, sql);
                 }
             } catch (Exception ex) {
                 LOG.error("create table error", ex);
@@ -362,9 +358,9 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
         } catch (SQLException ex) {
             LOG.error("save sql error", ex);
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
 
         for (FieldInfo hashField : beanInfo.getHashFields()) {
@@ -449,9 +445,9 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
         } catch (SQLException ex) {
             LOG.error("save const error error", ex);
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
 
         return null;
@@ -484,8 +480,8 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
                     } catch (SQLException ex) {
                         // LOG.error("save const error error", ex);
                     } finally {
-                        JdbcUtils.close(stmt);
-                        JdbcUtils.close(conn);
+                        WallDenyStat.JdbcUtils.close(stmt);
+                        WallDenyStat.JdbcUtils.close(conn);
                     }
                     cachePut(hashField.getHashForType(), hash, value);
                 }
@@ -524,8 +520,8 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
         } catch (SQLException ex) {
             LOG.error("save sql error", ex);
         } finally {
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -817,7 +813,7 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
         }
 
         String sql = "insert druid_app (domain, app) values (?, ?)";
-        JdbcUtils.execute(dataSource, sql, domain, app);
+        WallDenyStat.JdbcUtils.execute(dataSource, sql, domain, app);
     }
 
     public List<MonitorApp> listApp(String domain) throws SQLException {
@@ -841,9 +837,9 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
 
             return list;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -867,9 +863,9 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
 
             return null;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -912,9 +908,9 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
 
             return list;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -925,7 +921,7 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
         }
 
         String sql = "insert druid_cluster (domain, app, cluster) values (?, ?, ?)";
-        JdbcUtils.execute(dataSource, sql, domain, app, cluster);
+        WallDenyStat.JdbcUtils.execute(dataSource, sql, domain, app, cluster);
     }
 
     public MonitorCluster findCluster(String domain, String app, String cluster) throws SQLException {
@@ -949,9 +945,9 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
 
             return null;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -972,11 +968,11 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
         if (monitorInst == null) {
             String sql = "insert into druid_inst (domain, app, cluster, host, ip, lastActiveTime, lastPID) " //
                          + " values (?, ?, ?, ?, ?, ?, ?)";
-            JdbcUtils.execute(dataSource, sql, domain, app, cluster, host, ip, startTime, pid);
+            WallDenyStat.JdbcUtils.execute(dataSource, sql, domain, app, cluster, host, ip, startTime, pid);
         } else {
             String sql = "update druid_inst set ip = ?, lastActiveTime = ?, lastPID = ? " //
                          + " where domain = ? and app = ? and cluster = ? and host = ? ";
-            JdbcUtils.execute(dataSource, sql, ip, startTime, pid, domain, app, cluster, host);
+            WallDenyStat.JdbcUtils.execute(dataSource, sql, ip, startTime, pid, domain, app, cluster, host);
         }
     }
 
@@ -1003,9 +999,9 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
 
             return null;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -1048,9 +1044,9 @@ public class MonitorDaoJdbcImpl implements MonitorDao {
 
             return list;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 

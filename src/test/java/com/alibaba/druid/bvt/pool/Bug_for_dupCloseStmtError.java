@@ -19,8 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import com.alibaba.druid.PoolTestCase;
-import com.alibaba.druid.util.JdbcUtils;
-import junit.framework.TestCase;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import org.junit.Assert;
 
@@ -45,7 +44,7 @@ public class Bug_for_dupCloseStmtError extends PoolTestCase {
     protected void tearDown() throws Exception {
         dataSource.close();
         for (DruidDataSource dataSource : DruidDataSourceStatManager.getDruidDataSourceInstances()) {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
 
         super.tearDown();

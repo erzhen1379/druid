@@ -36,8 +36,7 @@ import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlSelectQueryBlock;
 import com.alibaba.druid.sql.dialect.oracle.ast.stmt.OracleSelectQueryBlock;
 import com.alibaba.druid.sql.dialect.postgresql.ast.stmt.PGSelectQueryBlock;
 import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerSelectQueryBlock;
-import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class SQLSelectBuilderImpl implements SQLSelectBuilder {
 
@@ -241,19 +240,19 @@ public class SQLSelectBuilderImpl implements SQLSelectBuilder {
     }
 
     protected SQLSelectQuery createSelectQueryBlock() {
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlSelectQueryBlock();
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)) {
             return new PGSelectQueryBlock();
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerSelectQueryBlock();
         }
 
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleSelectQueryBlock();
         }
 

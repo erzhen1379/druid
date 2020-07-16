@@ -17,6 +17,7 @@ package com.alibaba.druid.bvt.sql.postgresql;
 
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import com.alibaba.druid.sql.PGTest;
@@ -24,7 +25,6 @@ import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.postgresql.parser.PGSQLStatementParser;
 import com.alibaba.druid.sql.dialect.postgresql.visitor.PGSchemaStatVisitor;
 import com.alibaba.druid.sql.visitor.ParameterizedOutputVisitorUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PGSetTest extends PGTest {
 
@@ -53,7 +53,7 @@ public class PGSetTest extends PGTest {
 
         Assert.assertEquals(0, visitor.getColumns().size());
 
-        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.POSTGRESQL);
+        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.POSTGRESQL);
         System.out.println(mergedSql);
     }
 

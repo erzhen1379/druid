@@ -70,6 +70,7 @@ import com.alibaba.druid.sql.visitor.VisitorFeature;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.*;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class SQLUtils {
     private final static SQLParserFeature[] FORMAT_DEFAULT_FEATURES = {
@@ -394,7 +395,7 @@ public class SQLUtils {
     public static SQLASTOutputVisitor createFormatOutputVisitor(Appendable out, //
                                                                 List<SQLStatement> statementList, //
                                                                 String dbType) {
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             if (statementList == null || statementList.size() == 1) {
                 return new OracleOutputVisitor(out, false);
             } else {
@@ -406,15 +407,15 @@ public class SQLUtils {
             return new H2OutputVisitor(out);
         }
 
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlOutputVisitor(out);
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)) {
             return new PGOutputVisitor(out);
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerOutputVisitor(out);
         }
 
@@ -443,7 +444,7 @@ public class SQLUtils {
     }
 
     public static SchemaStatVisitor createSchemaStatVisitor(String dbType) {
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleSchemaStatVisitor();
         }
 
@@ -451,15 +452,15 @@ public class SQLUtils {
             return new H2SchemaStatVisitor();
         }
 
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlSchemaStatVisitor();
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)) {
             return new PGSchemaStatVisitor();
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerSchemaStatVisitor();
         }
 
@@ -536,10 +537,10 @@ public class SQLUtils {
         if (StringUtils.isEmpty(columnName)) return "";
         if (StringUtils.isEmpty(dbType)) dbType = JdbcConstants.MYSQL;
         String formatMethod = "";
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             formatMethod = "STR_TO_DATE";
             if (StringUtils.isEmpty(pattern)) pattern = "%Y-%m-%d %H:%i:%s";
-        } else if (JdbcUtils.isOracleDbType(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             formatMethod = "TO_DATE";
             if (StringUtils.isEmpty(pattern)) pattern = "yyyy-mm-dd hh24:mi:ss";
         } else {
@@ -883,15 +884,15 @@ public class SQLUtils {
                     normalizeName = normalizeName.replaceAll("`\\.`", ".");
                 }
 
-                if (JdbcUtils.isOracleDbType(dbType)) {
+                if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
                     if (OracleUtils.isKeyword(normalizeName)) {
                         return name;
                     }
-                } else if (JdbcUtils.isMysqlDbType(dbType)) {
+                } else if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
                     if (MySqlUtils.isKeyword(normalizeName)) {
                         return name;
                     }
-                } else if (JdbcUtils.isPgsqlDbType(dbType)
+                } else if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)
                         || JdbcConstants.ENTERPRISEDB.equals(dbType)
                         || JdbcConstants.POLARDB.equals(dbType)) {
                     if (PGUtils.isKeyword(normalizeName)) {

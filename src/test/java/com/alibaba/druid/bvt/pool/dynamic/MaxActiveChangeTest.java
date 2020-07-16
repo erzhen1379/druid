@@ -18,12 +18,11 @@ package com.alibaba.druid.bvt.pool.dynamic;
 import java.sql.Connection;
 
 import com.alibaba.druid.PoolTestCase;
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
-import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.GetConnectionTimeoutException;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class MaxActiveChangeTest extends PoolTestCase {
 
@@ -137,7 +136,7 @@ public class MaxActiveChangeTest extends PoolTestCase {
         }
 
         for (int i = 0; i < count; ++i) {
-            JdbcUtils.close(connections[i]);
+            WallDenyStat.JdbcUtils.close(connections[i]);
         }
 
         return successCount;

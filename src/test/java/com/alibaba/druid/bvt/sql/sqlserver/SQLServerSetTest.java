@@ -17,6 +17,7 @@ package com.alibaba.druid.bvt.sql.sqlserver;
 
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -25,7 +26,6 @@ import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.sqlserver.parser.SQLServerStatementParser;
 import com.alibaba.druid.sql.dialect.sqlserver.visitor.SQLServerSchemaStatVisitor;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class SQLServerSetTest extends TestCase {
 
@@ -50,7 +50,7 @@ public class SQLServerSetTest extends TestCase {
         Assert.assertEquals(0, visitor.getColumns().size());
         Assert.assertEquals(0, visitor.getConditions().size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED", text);
     }
@@ -71,7 +71,7 @@ public class SQLServerSetTest extends TestCase {
         Assert.assertEquals(0, visitor.getColumns().size());
         Assert.assertEquals(0, visitor.getConditions().size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("SET FMTONLY ON", text);
     }
@@ -92,7 +92,7 @@ public class SQLServerSetTest extends TestCase {
         Assert.assertEquals(0, visitor.getColumns().size());
         Assert.assertEquals(0, visitor.getConditions().size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("SET STATISTICS XML OFF", text);
     }
@@ -113,7 +113,7 @@ public class SQLServerSetTest extends TestCase {
         Assert.assertEquals(0, visitor.getColumns().size());
         Assert.assertEquals(0, visitor.getConditions().size());
 
-        String text = SQLUtils.toSQLString(stmtList, JdbcUtils.SQL_SERVER);
+        String text = SQLUtils.toSQLString(stmtList, WallDenyStat.JdbcUtils.SQL_SERVER);
 
         Assert.assertEquals("SET @state = N'Oregon'", text);
     }

@@ -20,12 +20,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.alibaba.druid.PoolTestCase;
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
-import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.stat.JdbcSqlStat;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class StatFilterResultSetMultiCloseTest extends PoolTestCase {
 
@@ -43,7 +42,7 @@ public class StatFilterResultSetMultiCloseTest extends PoolTestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_stat() throws Exception {

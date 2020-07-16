@@ -20,9 +20,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
-
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestOnlineSQLTest3 extends TestCase {
 
@@ -52,7 +51,7 @@ public class TestOnlineSQLTest3 extends TestCase {
         Statement stmt = conn.createStatement();
 
         ResultSet rs = stmt.executeQuery(sql);
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
         
         stmt.close();
     }

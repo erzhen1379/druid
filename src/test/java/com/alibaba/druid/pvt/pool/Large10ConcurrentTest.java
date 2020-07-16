@@ -11,10 +11,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.sql.DataSource;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 import junit.framework.TestCase;
 
@@ -63,7 +63,7 @@ public class Large10ConcurrentTest extends TestCase {
 
     protected void tearDown() throws Exception {
         for (int i = 0; i < dataSources.length; ++i) {
-            JdbcUtils.close(dataSources[i]);
+            WallDenyStat.JdbcUtils.close(dataSources[i]);
         }
         executor.shutdown();
         scheduler.shutdown();
@@ -110,7 +110,7 @@ public class Large10ConcurrentTest extends TestCase {
                 final int index = i * 8 + j;
                 Runnable task = new Runnable() {
                     public void run() {
-                        JdbcUtils.close(connections[index]);
+                        WallDenyStat.JdbcUtils.close(connections[index]);
                         closeLatch.countDown();
                     }
                 };

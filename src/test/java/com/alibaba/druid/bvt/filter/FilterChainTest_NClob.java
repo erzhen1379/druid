@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Properties;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -33,7 +34,6 @@ import com.alibaba.druid.proxy.jdbc.NClobProxy;
 import com.alibaba.druid.proxy.jdbc.ResultSetProxyImpl;
 import com.alibaba.druid.proxy.jdbc.StatementProxy;
 import com.alibaba.druid.proxy.jdbc.StatementProxyImpl;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class FilterChainTest_NClob extends TestCase {
 
@@ -58,7 +58,7 @@ public class FilterChainTest_NClob extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
 
         invokeCount = 0;
     }

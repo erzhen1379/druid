@@ -28,13 +28,13 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Calendar;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import junit.framework.TestCase;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PreparedStatementTest extends TestCase {
 
@@ -219,12 +219,12 @@ public class PreparedStatementTest extends TestCase {
 
             pstmt2 = conn.prepareStatement("SELECT * FROM T_PRE_STMT_TEST ORDER BY 2", new int[] { 1 });
             rs = pstmt2.executeQuery();
-            JdbcUtils.printResultSet(rs, System.out);
+            WallDenyStat.JdbcUtils.printResultSet(rs, System.out);
             rs.close();
 
             pstmt2 = conn.prepareStatement("SELECT * FROM T_PRE_STMT_TEST ORDER BY 2", new String[] { "ID" });
             rs = pstmt2.executeQuery();
-            JdbcUtils.printResultSet(rs, System.out);
+            WallDenyStat.JdbcUtils.printResultSet(rs, System.out);
             rs.close();
 
             pstmt2 = conn.prepareStatement("SELECT * FROM T_PRE_STMT_TEST ORDER BY 2", new String[] { "ID" });
@@ -289,7 +289,7 @@ public class PreparedStatementTest extends TestCase {
             } catch (SQLFeatureNotSupportedException ex) {
 
             }
-            JdbcUtils.printResultSet(rs, System.out);
+            WallDenyStat.JdbcUtils.printResultSet(rs, System.out);
             rs.close();
 
             pstmt2 = conn.prepareStatement("SELECT * FROM T_PRE_STMT_TEST ORDER BY 2",
@@ -445,13 +445,13 @@ public class PreparedStatementTest extends TestCase {
             } catch (SQLFeatureNotSupportedException ex) {
 
             }
-            JdbcUtils.printResultSet(rs, System.out);
+            WallDenyStat.JdbcUtils.printResultSet(rs, System.out);
             rs.close();
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(pstmt);
-            JdbcUtils.close(pstmt2);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(pstmt2);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 }

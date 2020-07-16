@@ -8,11 +8,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.vendor.PGValidConnectionChecker;
-import com.alibaba.druid.util.JdbcUtils;
 
 import junit.framework.TestCase;
 
@@ -71,9 +71,9 @@ public class PG_500_connection_Test extends TestCase {
                 } finally {
                     endLatch.countDown();
                 }
-                JdbcUtils.close(rs);
-                JdbcUtils.close(stmt);
-                JdbcUtils.close(conn);
+                WallDenyStat.JdbcUtils.close(rs);
+                WallDenyStat.JdbcUtils.close(stmt);
+                WallDenyStat.JdbcUtils.close(conn);
             }
         };
         

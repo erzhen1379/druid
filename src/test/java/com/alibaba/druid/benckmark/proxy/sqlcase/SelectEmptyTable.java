@@ -19,11 +19,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import com.alibaba.druid.benckmark.proxy.BenchmarkCase;
 import com.alibaba.druid.benckmark.proxy.SQLExecutor;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class SelectEmptyTable extends BenchmarkCase {
 
@@ -54,7 +54,7 @@ public class SelectEmptyTable extends BenchmarkCase {
             stmt = conn.createStatement();
             stmt.execute(createTableSql);
         } finally {
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
     }
 
@@ -81,7 +81,7 @@ public class SelectEmptyTable extends BenchmarkCase {
             stmt = conn.createStatement();
             stmt.execute(dropTableSql);
         } finally {
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
 
         conn.close();

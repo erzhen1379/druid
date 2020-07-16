@@ -15,21 +15,21 @@
  */
 package com.alibaba.druid.bvt.sql.oracle;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class OracleFormatTest2 extends TestCase {
 
     public void test_formatOracle() throws Exception {
         String text = "UPDATE MEMBER SET GMT_MODIFIED = SYSDATE, STATUS = ?, email = CASE WHEN status = ? THEN rtrim(email, ? || id || ?) ELSE email END WHERE ID IN (?) AND STATUS <> ?";
 
-        String formatedText = SQLUtils.format(text, JdbcUtils.ORACLE);
+        String formatedText = SQLUtils.format(text, WallDenyStat.JdbcUtils.ORACLE);
         System.out.println(formatedText);
-        String formatedText1 = SQLUtils.format(text, JdbcUtils.OCEANBASE_ORACLE);
+        String formatedText1 = SQLUtils.format(text, WallDenyStat.JdbcUtils.OCEANBASE_ORACLE);
         System.out.println(formatedText1);
-        String formatedText2 = SQLUtils.format(text, JdbcUtils.ALI_ORACLE);
+        String formatedText2 = SQLUtils.format(text, WallDenyStat.JdbcUtils.ALI_ORACLE);
         System.out.println(formatedText2);
     }
 }

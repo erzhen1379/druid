@@ -3,13 +3,12 @@ package com.alibaba.druid.pool.oracle;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.concurrent.CountDownLatch;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class QueryTimeoutTest extends TestCase {
 
@@ -55,7 +54,7 @@ public class QueryTimeoutTest extends TestCase {
 //            stmt.setQueryTimeout(1);
             
             final ResultSet rs = stmt.executeQuery();
-            JdbcUtils.printResultSet(rs);
+            WallDenyStat.JdbcUtils.printResultSet(rs);
             rs.close();
             stmt.close();
             conn.close();
@@ -71,7 +70,7 @@ public class QueryTimeoutTest extends TestCase {
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setQueryTimeout(1);
         ResultSet rs = stmt.executeQuery();
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
         rs.close();
         stmt.close();
         conn.close();

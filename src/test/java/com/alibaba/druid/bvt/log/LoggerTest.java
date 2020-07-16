@@ -9,12 +9,12 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.util.Utils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class LoggerTest extends TestCase {
 
@@ -104,6 +104,6 @@ public class LoggerTest extends TestCase {
     @Override
     protected void tearDown() throws Exception {
         Thread.currentThread().setContextClassLoader(contextClassLoader);
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 }

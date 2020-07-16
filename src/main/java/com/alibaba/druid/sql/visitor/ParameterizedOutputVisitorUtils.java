@@ -34,7 +34,7 @@ import com.alibaba.druid.sql.parser.SQLParserUtils;
 import com.alibaba.druid.sql.parser.SQLSelectListCache;
 import com.alibaba.druid.sql.parser.SQLStatementParser;
 import com.alibaba.druid.util.FnvHash;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class ParameterizedOutputVisitorUtils {
     private final static SQLParserFeature[] defaultFeatures = {
@@ -265,34 +265,34 @@ public class ParameterizedOutputVisitorUtils {
     }
 
     public static ParameterizedVisitor createParameterizedOutputVisitor(Appendable out, String dbType) {
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleParameterizedOutputVisitor(out);
         }
 
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlOutputVisitor(out, true);
         }
 
 
-        if (JdbcUtils.isPgsqlDbType(dbType)
-                || JdbcUtils.ENTERPRISEDB.equals(dbType)
-                || JdbcUtils.POLARDB.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)
+                || WallDenyStat.JdbcUtils.ENTERPRISEDB.equals(dbType)
+                || WallDenyStat.JdbcUtils.POLARDB.equals(dbType)) {
             return new PGOutputVisitor(out, true);
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerOutputVisitor(out, true);
         }
 
-        if (JdbcUtils.DB2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2OutputVisitor(out, true);
         }
 
-        if (JdbcUtils.PHOENIX.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.PHOENIX.equals(dbType)) {
             return new PhoenixOutputVisitor(out, true);
         }
 
-        if (JdbcUtils.ELASTIC_SEARCH.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.ELASTIC_SEARCH.equals(dbType)) {
             return new MySqlOutputVisitor(out, true);
         }
 

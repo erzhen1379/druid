@@ -39,7 +39,7 @@ import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
 
 import com.alibaba.druid.util.Base64;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class ConfigTools {
 
@@ -81,7 +81,7 @@ public class ConfigTools {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Failed to get public key", e);
 		} finally {
-			JdbcUtils.close(in);
+			WallDenyStat.JdbcUtils.close(in);
 		}
 	}
 
@@ -124,7 +124,7 @@ public class ConfigTools {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Failed to get public key", e);
 		} finally {
-			JdbcUtils.close(in);
+			WallDenyStat.JdbcUtils.close(in);
 		}
 	}
 

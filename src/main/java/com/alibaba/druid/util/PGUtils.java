@@ -27,6 +27,7 @@ import java.util.Set;
 
 import javax.sql.XAConnection;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.postgresql.core.BaseConnection;
 import org.postgresql.xa.PGXAConnection;
 
@@ -49,8 +50,8 @@ public class PGUtils {
                 tables.add(tableName);
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
 
         return tables;

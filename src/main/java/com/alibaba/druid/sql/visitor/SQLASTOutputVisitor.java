@@ -132,7 +132,7 @@ import com.alibaba.druid.sql.dialect.oracle.ast.stmt.OracleSelectPivot;
 import com.alibaba.druid.sql.dialect.oracle.parser.OracleFunctionDataType;
 import com.alibaba.druid.sql.dialect.oracle.parser.OracleProcedureDataType;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class SQLASTOutputVisitor extends SQLASTVisitorAdapter implements ParameterizedVisitor, PrintableVisitor {
     public static Boolean defaultPrintStatementAfterSemi;
@@ -1537,7 +1537,7 @@ public class SQLASTOutputVisitor extends SQLASTVisitorAdapter implements Paramet
 
             if (this.parameterized) {
                 if (size == 2 && i == 1 && param instanceof SQLCharExpr) {
-                    if (JdbcUtils.ORACLE.equals(dbType)) {
+                    if (WallDenyStat.JdbcUtils.ORACLE.equals(dbType)) {
                         if ("TO_CHAR".equalsIgnoreCase(function)
                                 || "TO_DATE".equalsIgnoreCase(function)) {
                             printChars(((SQLCharExpr) param).getText());

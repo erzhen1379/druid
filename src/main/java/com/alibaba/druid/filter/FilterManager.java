@@ -27,8 +27,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.Utils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class FilterManager {
 
@@ -91,7 +91,7 @@ public class FilterManager {
                 is = url.openStream();
                 property.load(is);
             } finally {
-                JdbcUtils.close(is);
+                WallDenyStat.JdbcUtils.close(is);
             }
 
             filterProperties.putAll(property);

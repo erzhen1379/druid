@@ -17,6 +17,7 @@ package com.alibaba.druid.bvt.proxy;
 
 import java.util.Properties;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -26,7 +27,6 @@ import com.alibaba.druid.mock.MockDriver;
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DruidDriverTest extends TestCase {
     protected void tearDown() throws Exception {
@@ -76,22 +76,22 @@ public class DruidDriverTest extends TestCase {
     }
 
     public void test_getRawDriverClassName() throws Exception {
-        String className = JdbcUtils.getDriverClassName("jdbc:mysql:");
+        String className = WallDenyStat.JdbcUtils.getDriverClassName("jdbc:mysql:");
         if (className.equals("com.mysql.jdbc.Driver")) {
-            assertEquals("com.mysql.jdbc.Driver", JdbcUtils.getDriverClassName("jdbc:mysql:"));
+            assertEquals("com.mysql.jdbc.Driver", WallDenyStat.JdbcUtils.getDriverClassName("jdbc:mysql:"));
         } else {
-            assertEquals("com.mysql.cj.jdbc.Driver", JdbcUtils.getDriverClassName("jdbc:mysql:"));
+            assertEquals("com.mysql.cj.jdbc.Driver", WallDenyStat.JdbcUtils.getDriverClassName("jdbc:mysql:"));
         }
 
-        Assert.assertEquals("oracle.jdbc.OracleDriver", JdbcUtils.getDriverClassName("jdbc:oracle:"));
+        Assert.assertEquals("oracle.jdbc.OracleDriver", WallDenyStat.JdbcUtils.getDriverClassName("jdbc:oracle:"));
         Assert.assertEquals("com.microsoft.jdbc.sqlserver.SQLServerDriver",
-                            JdbcUtils.getDriverClassName("jdbc:microsoft:"));
-        Assert.assertEquals("org.postgresql.Driver", JdbcUtils.getDriverClassName("jdbc:postgresql:xx"));
-        Assert.assertEquals("net.sourceforge.jtds.jdbc.Driver", JdbcUtils.getDriverClassName("jdbc:jtds:"));
+                            WallDenyStat.JdbcUtils.getDriverClassName("jdbc:microsoft:"));
+        Assert.assertEquals("org.postgresql.Driver", WallDenyStat.JdbcUtils.getDriverClassName("jdbc:postgresql:xx"));
+        Assert.assertEquals("net.sourceforge.jtds.jdbc.Driver", WallDenyStat.JdbcUtils.getDriverClassName("jdbc:jtds:"));
         {
             Exception error = null;
             try {
-                JdbcUtils.getDriverClassName("jdbc:xxx:");
+                WallDenyStat.JdbcUtils.getDriverClassName("jdbc:xxx:");
             } catch (Exception ex) {
                 error = ex;
             }

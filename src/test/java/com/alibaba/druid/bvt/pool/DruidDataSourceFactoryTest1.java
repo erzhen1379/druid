@@ -3,12 +3,12 @@ package com.alibaba.druid.bvt.pool;
 import java.sql.Connection;
 import java.util.Properties;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DruidDataSourceFactoryTest1 extends TestCase {
 
@@ -26,7 +26,7 @@ public class DruidDataSourceFactoryTest1 extends TestCase {
             Assert.assertEquals(Connection.TRANSACTION_NONE, dataSource.getDefaultTransactionIsolation().intValue());
 
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -45,7 +45,7 @@ public class DruidDataSourceFactoryTest1 extends TestCase {
                                 dataSource.getDefaultTransactionIsolation().intValue());
 
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -64,7 +64,7 @@ public class DruidDataSourceFactoryTest1 extends TestCase {
                                 dataSource.getDefaultTransactionIsolation().intValue());
 
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -83,7 +83,7 @@ public class DruidDataSourceFactoryTest1 extends TestCase {
                                 dataSource.getDefaultTransactionIsolation().intValue());
 
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -102,7 +102,7 @@ public class DruidDataSourceFactoryTest1 extends TestCase {
                                 dataSource.getDefaultTransactionIsolation().intValue());
 
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -120,7 +120,7 @@ public class DruidDataSourceFactoryTest1 extends TestCase {
             Assert.assertEquals(-1, dataSource.getDefaultTransactionIsolation().intValue());
 
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -140,7 +140,7 @@ public class DruidDataSourceFactoryTest1 extends TestCase {
                                 dataSource.getDefaultTransactionIsolation().intValue());
 
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -157,7 +157,7 @@ public class DruidDataSourceFactoryTest1 extends TestCase {
             Assert.assertEquals("jdbc:mock:xxx", dataSource.getUrl());
             Assert.assertTrue(dataSource.isInited());
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 

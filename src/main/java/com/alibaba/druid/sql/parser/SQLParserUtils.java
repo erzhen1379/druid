@@ -46,7 +46,7 @@ import com.alibaba.druid.sql.dialect.sqlserver.parser.SQLServerExprParser;
 import com.alibaba.druid.sql.dialect.sqlserver.parser.SQLServerLexer;
 import com.alibaba.druid.sql.dialect.sqlserver.parser.SQLServerStatementParser;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class SQLParserUtils {
 
@@ -72,45 +72,45 @@ public class SQLParserUtils {
     }
 
     public static SQLStatementParser createSQLStatementParser(String sql, String dbType, SQLParserFeature... features) {
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleStatementParser(sql);
         }
 
-        if (JdbcUtils.H2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.H2.equals(dbType)) {
             return new H2StatementParser(sql);
         }
 
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlStatementParser(sql, features);
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)
-                || JdbcUtils.ENTERPRISEDB.equals(dbType)
-                || JdbcUtils.POLARDB.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)
+                || WallDenyStat.JdbcUtils.ENTERPRISEDB.equals(dbType)
+                || WallDenyStat.JdbcUtils.POLARDB.equals(dbType)) {
             return new PGSQLStatementParser(sql);
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerStatementParser(sql);
         }
 
-        if (JdbcUtils.DB2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2StatementParser(sql);
         }
         
-        if (JdbcUtils.ODPS.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.ODPS.equals(dbType)) {
             return new OdpsStatementParser(sql);
         }
 
-        if (JdbcUtils.PHOENIX.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.PHOENIX.equals(dbType)) {
             return new PhoenixStatementParser(sql);
         }
 
-        if (JdbcUtils.HIVE.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.HIVE.equals(dbType)) {
             return new HiveStatementParser(sql);
         }
 
-        if (JdbcUtils.ELASTIC_SEARCH.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.ELASTIC_SEARCH.equals(dbType)) {
             return new MySqlStatementParser(sql);
         }
 
@@ -118,33 +118,33 @@ public class SQLParserUtils {
     }
 
     public static SQLExprParser createExprParser(String sql, String dbType) {
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleExprParser(sql);
         }
 
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlExprParser(sql);
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)
-                || JdbcUtils.ENTERPRISEDB.equals(dbType)
-                || JdbcUtils.POLARDB.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)
+                || WallDenyStat.JdbcUtils.ENTERPRISEDB.equals(dbType)
+                || WallDenyStat.JdbcUtils.POLARDB.equals(dbType)) {
             return new PGExprParser(sql);
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerExprParser(sql);
         }
         
-        if (JdbcUtils.DB2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2ExprParser(sql);
         }
         
-        if (JdbcUtils.ODPS.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.ODPS.equals(dbType)) {
             return new OdpsExprParser(sql);
         }
 
-        if (JdbcUtils.PHOENIX.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.PHOENIX.equals(dbType)) {
             return new PhoenixExprParser(sql);
         }
 
@@ -152,33 +152,33 @@ public class SQLParserUtils {
     }
 
     public static Lexer createLexer(String sql, String dbType) {
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleLexer(sql);
         }
 
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlLexer(sql);
         }
 
-        if (JdbcUtils.isPgsqlDbType(dbType)
-                || JdbcUtils.ENTERPRISEDB.equals(dbType)
-                || JdbcUtils.POLARDB.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.isPgsqlDbType(dbType)
+                || WallDenyStat.JdbcUtils.ENTERPRISEDB.equals(dbType)
+                || WallDenyStat.JdbcUtils.POLARDB.equals(dbType)) {
             return new PGLexer(sql);
         }
 
-        if (JdbcUtils.isSqlserverDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerLexer(sql);
         }
 
-        if (JdbcUtils.DB2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2Lexer(sql);
         }
 
-        if (JdbcUtils.ODPS.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.ODPS.equals(dbType)) {
             return new OdpsLexer(sql);
         }
 
-        if (JdbcUtils.PHOENIX.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.PHOENIX.equals(dbType)) {
             return new PhoenixLexer(sql);
         }
 
@@ -186,28 +186,28 @@ public class SQLParserUtils {
     }
 
     public static SQLSelectQueryBlock createSelectQueryBlock(String dbType) {
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleSelectQueryBlock();
         }
 
-        if (JdbcUtils.isMysqlDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlSelectQueryBlock();
         }
 
-        if (JdbcUtils.POSTGRESQL.equals(dbType)
-                || JdbcUtils.ENTERPRISEDB.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.POSTGRESQL.equals(dbType)
+                || WallDenyStat.JdbcUtils.ENTERPRISEDB.equals(dbType)) {
             return new PGSelectQueryBlock();
         }
 
-        if (JdbcUtils.SQL_SERVER.equals(dbType) || JdbcUtils.JTDS.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.SQL_SERVER.equals(dbType) || WallDenyStat.JdbcUtils.JTDS.equals(dbType)) {
             return new SQLServerSelectQueryBlock();
         }
 
-        if (JdbcUtils.DB2.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2SelectQueryBlock();
         }
 
-        if (JdbcUtils.ODPS.equals(dbType)) {
+        if (WallDenyStat.JdbcUtils.ODPS.equals(dbType)) {
             return new OdpsSelectQueryBlock();
         }
 

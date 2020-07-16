@@ -44,8 +44,8 @@ import com.alibaba.druid.stat.JdbcStatManager;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.JMXUtils;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.Utils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * @author wenshao [szujobs@hotmail.com]
@@ -247,7 +247,7 @@ public class DruidDriver implements Driver, DruidDriverMBean {
         config.setRawUrl(rawUrl);
 
         if (config.getRawDriverClassName() == null) {
-            String rawDriverClassname = JdbcUtils.getDriverClassName(rawUrl);
+            String rawDriverClassname = WallDenyStat.JdbcUtils.getDriverClassName(rawUrl);
             config.setRawDriverClassName(rawDriverClassname);
         }
 

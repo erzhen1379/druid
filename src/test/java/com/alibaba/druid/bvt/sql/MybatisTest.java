@@ -15,30 +15,30 @@
  */
 package com.alibaba.druid.bvt.sql;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class MybatisTest extends TestCase {
 
     private String sql = "select * from t where id = #{id}";
 
     public void test_mysql() throws Exception {
-        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, JdbcUtils.MYSQL));
-        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, JdbcUtils.OCEANBASE));
+        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, WallDenyStat.JdbcUtils.MYSQL));
+        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, WallDenyStat.JdbcUtils.OCEANBASE));
     }
 
     public void test_oracle() throws Exception {
-        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, JdbcUtils.ORACLE));
-        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, JdbcUtils.OCEANBASE_ORACLE));
-        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, JdbcUtils.ALI_ORACLE));
+        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, WallDenyStat.JdbcUtils.ORACLE));
+        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, WallDenyStat.JdbcUtils.OCEANBASE_ORACLE));
+        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, WallDenyStat.JdbcUtils.ALI_ORACLE));
     }
 
     public void test_postgres() throws Exception {
-        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, JdbcUtils.POSTGRESQL));
+        Assert.assertEquals("SELECT *\nFROM t\nWHERE id = #{id}", SQLUtils.format(sql, WallDenyStat.JdbcUtils.POSTGRESQL));
     }
 
     public void test_sql92() throws Exception {

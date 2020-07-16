@@ -19,9 +19,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
-
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestDruidOraclePreparedStatement extends TestCase {
 
@@ -46,12 +45,12 @@ public class TestDruidOraclePreparedStatement extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_0() throws Exception {
 
-        Class.forName(JdbcUtils.getDriverClassName(jdbcUrl));
+        Class.forName(WallDenyStat.JdbcUtils.getDriverClassName(jdbcUrl));
 
 //        {
 //            Connection conn = dataSource.getConnection();

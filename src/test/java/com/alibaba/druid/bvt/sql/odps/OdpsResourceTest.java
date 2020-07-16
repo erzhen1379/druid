@@ -21,6 +21,7 @@ import java.io.Reader;
 import java.util.List;
 
 import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -30,7 +31,6 @@ import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
 import com.alibaba.druid.sql.dialect.odps.parser.OdpsStatementParser;
 import com.alibaba.druid.sql.dialect.odps.visitor.OdpsSchemaStatVisitor;
 import com.alibaba.druid.sql.visitor.SchemaStatVisitor;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.Utils;
 
 public class OdpsResourceTest extends TestCase {
@@ -46,7 +46,7 @@ public class OdpsResourceTest extends TestCase {
         is = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
         Reader reader = new InputStreamReader(is, "UTF-8");
         String input = Utils.read(reader);
-        JdbcUtils.close(reader);
+        WallDenyStat.JdbcUtils.close(reader);
         String[] items = input.split("---------------------------");
         String sql = items[0].trim();
         String expect = null;

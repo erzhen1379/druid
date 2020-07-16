@@ -3,11 +3,11 @@ package com.alibaba.druid.bvt.pool;
 import java.sql.Connection;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class LockFairTest extends TestCase {
 
@@ -19,7 +19,7 @@ public class LockFairTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_fair() throws Exception {

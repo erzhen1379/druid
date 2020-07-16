@@ -30,13 +30,13 @@ import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
 import java.sql.Types;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PrecallTest extends TestCase {
 
@@ -387,9 +387,9 @@ public class PrecallTest extends TestCase {
             cstmt.execute();
 
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(cstmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(cstmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 

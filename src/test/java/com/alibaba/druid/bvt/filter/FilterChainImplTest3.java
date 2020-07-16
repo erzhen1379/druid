@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -16,7 +17,6 @@ import com.alibaba.druid.mock.MockDriver;
 import com.alibaba.druid.mock.MockStatement;
 import com.alibaba.druid.mock.MockStatementBase;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class FilterChainImplTest3 extends TestCase {
 
@@ -48,7 +48,7 @@ public class FilterChainImplTest3 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_executeQuery() throws Exception {

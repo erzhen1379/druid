@@ -35,8 +35,8 @@ import com.alibaba.druid.filter.FilterChain;
 import com.alibaba.druid.filter.FilterChainImpl;
 import com.alibaba.druid.stat.JdbcDataSourceStat;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.Utils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * @author wenshao [szujobs@hotmail.com]
@@ -67,7 +67,7 @@ public class DataSourceProxyImpl implements DataSourceProxy, DataSourceProxyImpl
         super();
         this.rawDriver = rawDriver;
         this.config = config;
-        this.dbType = JdbcUtils.getDbType(config.getRawUrl(), config.getRawDriverClassName());
+        this.dbType = WallDenyStat.JdbcUtils.getDbType(config.getRawUrl(), config.getRawDriverClassName());
         this.dataSourceStat = new JdbcDataSourceStat(config.getName(), config.getUrl(), dbType);
     }
 

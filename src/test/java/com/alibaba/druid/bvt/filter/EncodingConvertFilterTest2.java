@@ -25,6 +25,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Collections;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -40,7 +41,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.druid.proxy.jdbc.ConnectionProxy;
 import com.alibaba.druid.util.Utils;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.jdbc.ResultSetMetaDataBase.ColumnMetaData;
 
 public class EncodingConvertFilterTest2 extends TestCase {
@@ -77,7 +77,7 @@ public class EncodingConvertFilterTest2 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_stat() throws Exception {

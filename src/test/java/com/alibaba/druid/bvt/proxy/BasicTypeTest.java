@@ -29,12 +29,12 @@ import java.sql.Types;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class BasicTypeTest extends TestCase {
 
@@ -122,7 +122,7 @@ public class BasicTypeTest extends TestCase {
             pstmt.setBoolean(17, true);
             pstmt.execute();
             pstmt.clearParameters();
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
 
             stmt = conn.createStatement();
             stmt.close();
@@ -195,7 +195,7 @@ public class BasicTypeTest extends TestCase {
             rs.updateBoolean(17, false);
             rs.updateRow();
 
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 //            conn.rollback(point);
             conn.setAutoCommit(true);
 
@@ -252,32 +252,32 @@ public class BasicTypeTest extends TestCase {
             rs.deleteRow();
 
             Assert.assertEquals(12, rs.findColumn("F12"));
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             pstmt = conn.prepareStatement("SELECT F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16 FROM T_BASIC_TYPE");
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
 
             pstmt = conn.prepareStatement("SELECT F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16 FROM T_BASIC_TYPE",
                                           new int[] { 1, 2 });
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
 
             pstmt = conn.prepareStatement("SELECT F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16 FROM T_BASIC_TYPE",
                                           new String[] { "F1", "F2" });
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
 
             pstmt = conn.prepareStatement("SELECT F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16 FROM T_BASIC_TYPE",
                                           Statement.RETURN_GENERATED_KEYS);
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
 
             pstmt = conn.prepareStatement("SELECT F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16 FROM T_BASIC_TYPE",
                                           ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pstmt.executeQuery().close();
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
 
             pstmt = conn.prepareStatement("SELECT F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16 FROM T_BASIC_TYPE",
                                           ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE,
                                           ResultSet.CLOSE_CURSORS_AT_COMMIT);
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
 
             cstmt = conn.prepareCall("CALL BASIC_CALL_0(?, ?, ?, ?, ?,	?, ?, ?, ?, ?,	?, ?, ?,?, ?, 	?, ?)");
             cstmt.registerOutParameter(1, Types.FLOAT);
@@ -688,11 +688,11 @@ public class BasicTypeTest extends TestCase {
             cstmt.wasNull();
 
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(pstmt);
-            JdbcUtils.close(cstmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(cstmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 

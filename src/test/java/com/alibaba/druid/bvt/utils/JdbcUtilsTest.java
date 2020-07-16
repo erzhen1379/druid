@@ -19,11 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class JdbcUtilsTest extends TestCase {
 
@@ -35,28 +35,28 @@ public class JdbcUtilsTest extends TestCase {
         dataSource.setUrl("jdbc:h2:mem:test;");
         dataSource.setTestOnBorrow(false);
 
-        JdbcUtils.execute(dataSource, "CREATE TABLE user (id INT, name VARCHAR(40))");
+        WallDenyStat.JdbcUtils.execute(dataSource, "CREATE TABLE user (id INT, name VARCHAR(40))");
 
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.execute(dataSource, "DROP TABLE user");
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.execute(dataSource, "DROP TABLE user");
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_curd() throws Exception {
         {
-            List<Map<String, Object>> list = JdbcUtils.executeQuery(dataSource, "select * from user");
+            List<Map<String, Object>> list = WallDenyStat.JdbcUtils.executeQuery(dataSource, "select * from user");
             Assert.assertEquals(0, list.size());
         }
         {
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("id", 123);
             data.put("name", "高傲的羊");
-            JdbcUtils.insertToTable(dataSource, "user", data);
+            WallDenyStat.JdbcUtils.insertToTable(dataSource, "user", data);
         }
         {
-            List<Map<String, Object>> list = JdbcUtils.executeQuery(dataSource, "select * from user");
+            List<Map<String, Object>> list = WallDenyStat.JdbcUtils.executeQuery(dataSource, "select * from user");
             Assert.assertEquals(1, list.size());
             Map<String, Object> data = list.get(0);
             
@@ -64,7 +64,7 @@ public class JdbcUtilsTest extends TestCase {
             Assert.assertEquals("高傲的羊", data.get("NAME"));
         }
         {
-            List<Map<String, Object>> list = JdbcUtils.executeQuery(dataSource, "select id \"id\", name \"name\" from user");
+            List<Map<String, Object>> list = WallDenyStat.JdbcUtils.executeQuery(dataSource, "select id \"id\", name \"name\" from user");
             Assert.assertEquals(1, list.size());
             Map<String, Object> data = list.get(0);
             
@@ -72,10 +72,10 @@ public class JdbcUtilsTest extends TestCase {
             Assert.assertEquals("高傲的羊", data.get("name"));
         }
         {
-            JdbcUtils.executeUpdate(dataSource, "delete from user");
+            WallDenyStat.JdbcUtils.executeUpdate(dataSource, "delete from user");
         }
         {
-            List<Map<String, Object>> list = JdbcUtils.executeQuery(dataSource, "select * from user");
+            List<Map<String, Object>> list = WallDenyStat.JdbcUtils.executeQuery(dataSource, "select * from user");
             Assert.assertEquals(0, list.size());
         }
     }   

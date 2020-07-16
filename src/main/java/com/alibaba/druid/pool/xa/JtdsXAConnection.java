@@ -23,8 +23,7 @@ import javax.sql.StatementEventListener;
 import javax.sql.XAConnection;
 import javax.transaction.xa.XAResource;
 
-import com.alibaba.druid.util.JdbcUtils;
-
+import com.alibaba.druid.wall.WallDenyStat;
 import net.sourceforge.jtds.jdbc.XASupport;
 
 public class JtdsXAConnection implements XAConnection {
@@ -57,7 +56,7 @@ public class JtdsXAConnection implements XAConnection {
             // Ignore close errors
         }
         
-        JdbcUtils.close(connection);
+        WallDenyStat.JdbcUtils.close(connection);
     }
 
     @Override

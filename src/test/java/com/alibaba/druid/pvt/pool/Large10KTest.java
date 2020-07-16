@@ -5,10 +5,10 @@ import java.sql.Connection;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class Large10KTest extends TestCase {
 
@@ -50,7 +50,7 @@ public class Large10KTest extends TestCase {
 
     protected void tearDown() throws Exception {
         for (int i = 0; i < dataSources.length; ++i) {
-            JdbcUtils.close(dataSources[i]);
+            WallDenyStat.JdbcUtils.close(dataSources[i]);
         }
         scheduler.shutdown();
     }

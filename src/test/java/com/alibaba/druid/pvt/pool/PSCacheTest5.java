@@ -3,13 +3,13 @@ package com.alibaba.druid.pvt.pool;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import junit.framework.TestCase;
 
 import com.alibaba.druid.mock.MockPreparedStatement;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PSCacheTest5 extends TestCase {
 
@@ -23,7 +23,7 @@ public class PSCacheTest5 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_0() throws Exception {

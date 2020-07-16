@@ -85,9 +85,9 @@ import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.JMXUtils;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.druid.util.Utils;
+import com.alibaba.druid.wall.WallDenyStat;
 import com.alibaba.druid.wall.WallFilter;
 import com.alibaba.druid.wall.WallProviderStatValue;
 
@@ -829,7 +829,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
             }
 
             if (this.dbType == null || this.dbType.length() == 0) {
-                this.dbType = JdbcUtils.getDbType(jdbcUrl, null);
+                this.dbType = WallDenyStat.JdbcUtils.getDbType(jdbcUrl, null);
             }
 
             if (JdbcConstants.MYSQL.equals(this.dbType)
@@ -1189,7 +1189,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
     protected void resolveDriver() throws SQLException {
         if (this.driver == null) {
             if (this.driverClass == null || this.driverClass.isEmpty()) {
-                this.driverClass = JdbcUtils.getDriverClassName(this.jdbcUrl);
+                this.driverClass = WallDenyStat.JdbcUtils.getDriverClassName(this.jdbcUrl);
             }
 
             if (MockDriver.class.getName().equals(driverClass)) {
@@ -1198,7 +1198,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
                 if (jdbcUrl == null && (driverClass == null || driverClass.length() == 0)) {
                     throw new SQLException("url not set");
                 }
-                driver = JdbcUtils.createDriver(driverClassLoader, driverClass);
+                driver = WallDenyStat.JdbcUtils.createDriver(driverClassLoader, driverClass);
             }
         } else {
             if (this.driverClass == null) {
@@ -1208,7 +1208,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
     }
 
     protected void initCheck() throws SQLException {
-        if (JdbcUtils.ORACLE.equals(this.dbType)) {
+        if (WallDenyStat.JdbcUtils.ORACLE.equals(this.dbType)) {
             isOracle = true;
 
             if (driver.getMajorVersion() < 10) {
@@ -1221,10 +1221,10 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
             }
 
             oracleValidationQueryCheck();
-        } else if (JdbcUtils.DB2.equals(dbType)) {
+        } else if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             db2ValidationQueryCheck();
-        } else if (JdbcUtils.MYSQL.equals(this.dbType)
-                || JdbcUtils.MYSQL_DRIVER_6.equals(this.dbType)) {
+        } else if (WallDenyStat.JdbcUtils.MYSQL.equals(this.dbType)
+                || WallDenyStat.JdbcUtils.MYSQL_DRIVER_6.equals(this.dbType)) {
             isMySql = true;
         }
 
@@ -1297,7 +1297,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
         }
 
         String realDriverClassName = driver.getClass().getName();
-        if (JdbcUtils.isMySqlDriver(realDriverClassName)) {
+        if (WallDenyStat.JdbcUtils.isMySqlDriver(realDriverClassName)) {
             this.validConnectionChecker = new MySqlValidConnectionChecker();
 
         } else if (realDriverClassName.equals(JdbcConstants.ORACLE_DRIVER)
@@ -1336,7 +1336,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
                     || realDriverClassName.equals(JdbcConstants.ORACLE_DRIVER2)) {
                 this.exceptionSorter = new OracleExceptionSorter();
             } else if (realDriverClassName.equals(JdbcConstants.OCEANBASE_DRIVER)) { // 写一个真实的 TestCase
-                if (JdbcUtils.OCEANBASE_ORACLE.equalsIgnoreCase(dbType)) {
+                if (WallDenyStat.JdbcUtils.OCEANBASE_ORACLE.equalsIgnoreCase(dbType)) {
                     this.exceptionSorter = new OceanBaseOracleExceptionSorter();
                 } else {
                     this.exceptionSorter = new MySqlExceptionSorter();
@@ -1498,7 +1498,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
      * @deprecated
      */
     public void discardConnection(Connection realConnection) {
-        JdbcUtils.close(realConnection);
+        WallDenyStat.JdbcUtils.close(realConnection);
 
         lock.lock();
         try {
@@ -1520,7 +1520,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
 
         Connection conn = holder.getConnection();
         if (conn != null) {
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(conn);
         }
 
         lock.lock();
@@ -1600,7 +1600,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
                     }
 
                     if (discard) {
-                        JdbcUtils.close(pyConnInfo.getPhysicalConnection());
+                        WallDenyStat.JdbcUtils.close(pyConnInfo.getPhysicalConnection());
                     }
                 }
             }
@@ -1831,7 +1831,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
                 holder.lock.lock();
                 try {
                     for (Statement stmt : holder.statementTrace) {
-                        JdbcUtils.close(stmt);
+                        WallDenyStat.JdbcUtils.close(stmt);
                     }
                 } finally {
                     holder.lock.unlock();
@@ -1932,7 +1932,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
             if (testOnReturn) {
                 boolean validate = testConnectionInternal(holder, physicalConnection);
                 if (!validate) {
-                    JdbcUtils.close(physicalConnection);
+                    WallDenyStat.JdbcUtils.close(physicalConnection);
 
                     destroyCountUpdater.incrementAndGet(this);
 
@@ -1981,7 +1981,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
             }
 
             if (!result) {
-                JdbcUtils.close(holder.conn);
+                WallDenyStat.JdbcUtils.close(holder.conn);
                 LOG.info("connection recyle failed.");
             }
         } catch (Throwable e) {
@@ -2694,7 +2694,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
                 physicalConnection.createTaskId = taskId;
                 boolean result = put(physicalConnection);
                 if (!result) {
-                    JdbcUtils.close(physicalConnection.getPhysicalConnection());
+                    WallDenyStat.JdbcUtils.close(physicalConnection.getPhysicalConnection());
                     LOG.info("put physical connection to pool failed.");
                 }
                 break;
@@ -2815,7 +2815,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
 
                 boolean result = put(connection);
                 if (!result) {
-                    JdbcUtils.close(connection.getPhysicalConnection());
+                    WallDenyStat.JdbcUtils.close(connection.getPhysicalConnection());
                     LOG.info("put physical connection to pool failed.");
                 }
 
@@ -2942,7 +2942,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
                     lock.unlock();
                 }
 
-                JdbcUtils.close(pooledConnection);
+                WallDenyStat.JdbcUtils.close(pooledConnection);
                 pooledConnection.abandond();
                 removeAbandonedCount++;
                 removeCount++;
@@ -3123,7 +3123,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
             for (int i = 0; i < evictCount; ++i) {
                 DruidConnectionHolder item = evictConnections[i];
                 Connection connection = item.getConnection();
-                JdbcUtils.close(connection);
+                WallDenyStat.JdbcUtils.close(connection);
                 destroyCountUpdater.incrementAndGet(this);
             }
             Arrays.fill(evictConnections, null);
@@ -3779,7 +3779,7 @@ public class DruidDataSource extends DruidAbstractDataSource implements DruidDat
 
             try {
                 if (!this.isFillable(toCount)) {
-                    JdbcUtils.close(holder.getConnection());
+                    WallDenyStat.JdbcUtils.close(holder.getConnection());
                     LOG.info("fill connections skip.");
                     break;
                 }

@@ -30,8 +30,8 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.alibaba.druid.proxy.jdbc.DataSourceProxy;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.StringUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * <pre>
@@ -263,7 +263,7 @@ public class ConfigFilter extends FilterAdapter {
             LOG.error("load config file error, file : " + filePath, ex);
             return null;
         } finally {
-            JdbcUtils.close(inStream);
+            WallDenyStat.JdbcUtils.close(inStream);
         }
     }
 

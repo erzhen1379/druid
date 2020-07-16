@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -15,7 +16,6 @@ import com.alibaba.druid.proxy.jdbc.PreparedStatementProxy;
 import com.alibaba.druid.proxy.jdbc.ResultSetProxy;
 import com.alibaba.druid.proxy.jdbc.StatementProxy;
 import com.alibaba.druid.stat.JdbcSqlStat;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class StatFilterExecErrorTest extends TestCase {
 
@@ -46,7 +46,7 @@ public class StatFilterExecErrorTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_stat() throws Exception {
@@ -64,8 +64,8 @@ public class StatFilterExecErrorTest extends TestCase {
         } catch (SQLException eror) {
 
         } finally {
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
 
         Assert.assertEquals(1, sqlStat.getErrorCount());

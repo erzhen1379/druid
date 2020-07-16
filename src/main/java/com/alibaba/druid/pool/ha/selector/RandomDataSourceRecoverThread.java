@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * A Thread trying to test if DataSource in blacklist has been recovered.
@@ -75,7 +75,7 @@ public class RandomDataSourceRecoverThread implements Runnable {
             LOG.warn("DataSource[" + dataSource.getName() + "] is still unavailable. Exception: "
                     + e.getMessage());
         } finally {
-            JdbcUtils.close(connection);
+            WallDenyStat.JdbcUtils.close(connection);
         }
     }
 

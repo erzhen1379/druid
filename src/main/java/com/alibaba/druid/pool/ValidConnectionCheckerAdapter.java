@@ -20,7 +20,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * @author wenshao [szujobs@hotmail.com]
@@ -44,8 +44,8 @@ public class ValidConnectionCheckerAdapter implements ValidConnectionChecker {
             rs = stmt.executeQuery(query);
             return true;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
     }
 

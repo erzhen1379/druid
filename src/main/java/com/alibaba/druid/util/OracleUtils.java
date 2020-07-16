@@ -35,6 +35,7 @@ import com.alibaba.druid.sql.ast.statement.SQLCreateTableStatement;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import oracle.jdbc.OracleConnection;
 import oracle.jdbc.OracleResultSet;
 import oracle.jdbc.OracleStatement;
@@ -249,8 +250,8 @@ public class OracleUtils {
                 tables.add(tableName);
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
 
         return tables;
@@ -289,8 +290,8 @@ public class OracleUtils {
                 ddlList.add(ddl);
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(pstmt);
         }
 
         return ddlList;

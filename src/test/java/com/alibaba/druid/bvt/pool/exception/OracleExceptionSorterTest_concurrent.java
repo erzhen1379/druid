@@ -2,9 +2,9 @@ package com.alibaba.druid.bvt.pool.exception;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.concurrent.CountDownLatch;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -15,7 +15,6 @@ import com.alibaba.druid.pool.vendor.OracleExceptionSorter;
 import com.alibaba.druid.stat.DruidDataSourceStatManager;
 import com.alibaba.druid.stat.JdbcStatManager;
 import com.alibaba.druid.test.util.OracleMockDriver;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class OracleExceptionSorterTest_concurrent extends TestCase {
 
@@ -38,7 +37,7 @@ public class OracleExceptionSorterTest_concurrent extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
         Assert.assertEquals(0, DruidDataSourceStatManager.getInstance().getDataSourceList().size());
     }
 

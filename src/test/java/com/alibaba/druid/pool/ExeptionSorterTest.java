@@ -1,7 +1,7 @@
 package com.alibaba.druid.pool;
 
 import com.alibaba.druid.pool.vendor.MySqlExceptionSorter;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 import com.mysql.jdbc.Driver;
 import junit.framework.TestCase;
 
@@ -17,7 +17,7 @@ public class ExeptionSorterTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_dataSource() throws Exception {

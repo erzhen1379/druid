@@ -4,7 +4,7 @@ import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.postgresql.parser.PGSQLStatementParser;
 import com.alibaba.druid.sql.dialect.postgresql.visitor.PGSchemaStatVisitor;
 import com.alibaba.druid.sql.visitor.ParameterizedOutputVisitorUtils;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import java.util.List;
 /**
@@ -20,7 +20,7 @@ public class AliasTest_Type extends PGTest {
         Assert.assertEquals(1, statementList.size());
         PGSchemaStatVisitor visitor = new PGSchemaStatVisitor();
         statemen.accept(visitor);
-        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.POSTGRESQL);
+        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.POSTGRESQL);
         System.out.println(mergedSql);
     }
 }

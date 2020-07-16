@@ -22,9 +22,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
-
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestPoolStatement extends TestCase {
 
@@ -68,7 +67,7 @@ public class TestPoolStatement extends TestCase {
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
         rs.close();
         stmt.close();
         conn.close();

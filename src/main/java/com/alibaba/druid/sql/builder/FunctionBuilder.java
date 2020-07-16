@@ -18,7 +18,7 @@ package com.alibaba.druid.sql.builder;
 import com.alibaba.druid.sql.ast.SQLExpr;
 import com.alibaba.druid.sql.ast.expr.SQLMethodInvokeExpr;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 /**
  * Created by wenshao on 09/07/2017.
@@ -66,7 +66,7 @@ public class FunctionBuilder {
             return new SQLMethodInvokeExpr("coalesce", null, expr1, expr2);
         }
 
-        if (JdbcUtils.isOracleDbType(dbType)) {
+        if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new SQLMethodInvokeExpr("nvl", null, expr1, expr2);
         }
 

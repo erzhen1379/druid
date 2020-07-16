@@ -26,13 +26,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class SchemaReadTest extends TestCase {
 
@@ -68,16 +68,16 @@ public class SchemaReadTest extends TestCase {
             DatabaseMetaData metadata = conn.getMetaData();
             {
                 ResultSet tableTypes = metadata.getTableTypes();
-                JdbcUtils.printResultSet(tableTypes, System.out);
-                JdbcUtils.close(tableTypes);
+                WallDenyStat.JdbcUtils.printResultSet(tableTypes, System.out);
+                WallDenyStat.JdbcUtils.close(tableTypes);
             }
             {
                 conn.setAutoCommit(false);
                 ResultSet tables = metadata.getTables(null, null, null, null);
-                JdbcUtils.printResultSet(tables, System.out);
+                WallDenyStat.JdbcUtils.printResultSet(tables, System.out);
                 conn.commit();
                 conn.setAutoCommit(true);
-                JdbcUtils.close(tables);
+                WallDenyStat.JdbcUtils.close(tables);
             }
 
             {
@@ -90,19 +90,19 @@ public class SchemaReadTest extends TestCase {
                     stmt = conn.createStatement();
 
                     rs = stmt.executeQuery(sql);
-                    JdbcUtils.printResultSet(rs, System.out);
+                    WallDenyStat.JdbcUtils.printResultSet(rs, System.out);
 
-                    JdbcUtils.close(rs);
+                    WallDenyStat.JdbcUtils.close(rs);
                     Assert.assertTrue(rs.isClosed());
-                    JdbcUtils.close(stmt);
+                    WallDenyStat.JdbcUtils.close(stmt);
                     Assert.assertTrue(stmt.isClosed());
                 }
-                JdbcUtils.close(tables);
+                WallDenyStat.JdbcUtils.close(tables);
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
             Assert.assertTrue(conn.isClosed());
         }
     }
@@ -134,7 +134,7 @@ public class SchemaReadTest extends TestCase {
             {
                 ResultSet tableTypes = metadata.getTableTypes();
                 printResultSetUseColumnName(tableTypes, System.out);
-                JdbcUtils.close(tableTypes);
+                WallDenyStat.JdbcUtils.close(tableTypes);
             }
             {
                 conn.setAutoCommit(false);
@@ -142,7 +142,7 @@ public class SchemaReadTest extends TestCase {
                 printResultSetUseColumnName(tables, System.out);
                 conn.commit();
                 conn.setAutoCommit(true);
-                JdbcUtils.close(tables);
+                WallDenyStat.JdbcUtils.close(tables);
             }
 
             {
@@ -157,17 +157,17 @@ public class SchemaReadTest extends TestCase {
                     rs = stmt.executeQuery(sql);
                     printResultSetUseColumnName(rs, System.out);
 
-                    JdbcUtils.close(rs);
+                    WallDenyStat.JdbcUtils.close(rs);
                     Assert.assertTrue(rs.isClosed());
-                    JdbcUtils.close(stmt);
+                    WallDenyStat.JdbcUtils.close(stmt);
                     Assert.assertTrue(stmt.isClosed());
                 }
-                JdbcUtils.close(tables);
+                WallDenyStat.JdbcUtils.close(tables);
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(conn);
             Assert.assertTrue(conn.isClosed());
         }
     }

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -12,7 +13,6 @@ import org.junit.Assert;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.stat.JdbcDataSourceStat;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class GlobalStatTest1 extends TestCase {
 
@@ -34,8 +34,8 @@ public class GlobalStatTest1 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSourceA);
-        JdbcUtils.close(dataSourceB);
+        WallDenyStat.JdbcUtils.close(dataSourceA);
+        WallDenyStat.JdbcUtils.close(dataSourceB);
         
         JdbcDataSourceStat.setGlobal(null);
         

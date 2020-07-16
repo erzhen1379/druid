@@ -1,11 +1,11 @@
 package com.alibaba.druid.bvt.pool;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TimeBetweenLogStatsMillisTest extends TestCase {
 
@@ -20,7 +20,7 @@ public class TimeBetweenLogStatsMillisTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_0() throws Exception {

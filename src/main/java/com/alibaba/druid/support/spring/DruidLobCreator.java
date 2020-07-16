@@ -23,9 +23,8 @@ import java.sql.Clob;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.springframework.jdbc.support.lob.LobCreator;
-
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DruidLobCreator implements LobCreator {
 
@@ -68,8 +67,8 @@ public class DruidLobCreator implements LobCreator {
             } catch (Exception e) {
                 throw new SQLException("setClob error", e);
             } finally {
-                JdbcUtils.close(asciiStream);
-                JdbcUtils.close(out);
+                WallDenyStat.JdbcUtils.close(asciiStream);
+                WallDenyStat.JdbcUtils.close(out);
             }
 
             ps.setClob(paramIndex, clob);

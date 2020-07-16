@@ -127,18 +127,11 @@ import com.alibaba.druid.sql.visitor.functions.Nil;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.alibaba.druid.util.FnvHash;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.ServletPathMatcher;
 import com.alibaba.druid.util.StringUtils;
-import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.*;
 import com.alibaba.druid.wall.WallConfig.TenantCallBack;
 import com.alibaba.druid.wall.WallConfig.TenantCallBack.StatementType;
-import com.alibaba.druid.wall.WallContext;
-import com.alibaba.druid.wall.WallProvider;
-import com.alibaba.druid.wall.WallSqlTableStat;
-import com.alibaba.druid.wall.WallUpdateCheckHandler;
-import com.alibaba.druid.wall.WallUpdateCheckItem;
-import com.alibaba.druid.wall.WallVisitor;
 import com.alibaba.druid.wall.violation.ErrorCode;
 import com.alibaba.druid.wall.violation.IllegalSQLObjectViolation;
 
@@ -2517,7 +2510,7 @@ public class WallVisitorUtils {
 
                         hasResource = true;
                     } finally {
-                        JdbcUtils.close(in);
+                        WallDenyStat.JdbcUtils.close(in);
                     }
                 }
             }
@@ -2535,7 +2528,7 @@ public class WallVisitorUtils {
                         readFromInputStream(names, in);
                     }
                 } finally {
-                    JdbcUtils.close(in);
+                    WallDenyStat.JdbcUtils.close(in);
                 }
             }
         } catch (IOException e) {
@@ -2559,7 +2552,7 @@ public class WallVisitorUtils {
                 }
             }
         } finally {
-            JdbcUtils.close(reader);
+            WallDenyStat.JdbcUtils.close(reader);
         }
     }
 

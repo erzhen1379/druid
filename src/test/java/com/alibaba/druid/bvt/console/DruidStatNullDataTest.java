@@ -3,16 +3,12 @@ package com.alibaba.druid.bvt.console;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.console.DruidStat;
 import com.alibaba.druid.support.console.Option;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DruidStatNullDataTest extends TestCase {
 
@@ -37,7 +33,7 @@ public class DruidStatNullDataTest extends TestCase {
 	}
 
 	protected void dispose() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
 	public void test_printDruidStat() throws Exception {

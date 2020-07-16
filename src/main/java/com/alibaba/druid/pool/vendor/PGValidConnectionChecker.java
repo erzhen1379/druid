@@ -19,7 +19,7 @@ import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.druid.pool.ValidConnectionChecker;
 import com.alibaba.druid.pool.ValidConnectionCheckerAdapter;
 import com.alibaba.druid.proxy.jdbc.ConnectionProxy;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -68,8 +68,8 @@ public class PGValidConnectionChecker extends ValidConnectionCheckerAdapter impl
             rs = stmt.executeQuery(validateQuery);
             return true;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
     }
 }

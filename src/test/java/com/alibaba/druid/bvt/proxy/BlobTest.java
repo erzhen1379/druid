@@ -24,13 +24,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class BlobTest extends TestCase {
 
@@ -122,25 +122,25 @@ public class BlobTest extends TestCase {
                 readBlob.getBinaryStream().close();
                 readBlob.free();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.getBinaryStream(2).close();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.getBinaryStream("DATA").close();
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.getBytes(2);
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
@@ -148,7 +148,7 @@ public class BlobTest extends TestCase {
                 x.setBytes(1, new byte[100]);
                 rs.updateBlob(2, x);
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
@@ -156,13 +156,13 @@ public class BlobTest extends TestCase {
                 x.setBytes(1, new byte[100]);
                 rs.updateBlob("DATA", x);
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.updateBlob("DATA", new ByteArrayInputStream(new byte[100]));
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
@@ -173,18 +173,18 @@ public class BlobTest extends TestCase {
             while (rs.next()) {
                 rs.updateBlob("DATA", new ByteArrayInputStream(new byte[100]), 100);
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
 
             rs = stmt.executeQuery("SELECT ID, DATA FROM T_BLOB");
             while (rs.next()) {
                 rs.updateBlob(2, new ByteArrayInputStream(new byte[100]), 100);
             }
-            JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(rs);
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
-            JdbcUtils.close(pstmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 

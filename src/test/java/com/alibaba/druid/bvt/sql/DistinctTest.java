@@ -15,38 +15,38 @@
  */
 package com.alibaba.druid.bvt.sql;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class DistinctTest extends TestCase {
 
     private String sql = "select count(distinct *) from t";
 
     public void test_mysql() throws Exception {
-        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, JdbcUtils.MYSQL));
-        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, JdbcUtils.OCEANBASE));
+        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, WallDenyStat.JdbcUtils.MYSQL));
+        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, WallDenyStat.JdbcUtils.OCEANBASE));
     }
 
     public void test_oracle() throws Exception {
-        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, JdbcUtils.ORACLE));
-        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, JdbcUtils.OCEANBASE_ORACLE));
-        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, JdbcUtils.ALI_ORACLE));
+        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, WallDenyStat.JdbcUtils.ORACLE));
+        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, WallDenyStat.JdbcUtils.OCEANBASE_ORACLE));
+        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, WallDenyStat.JdbcUtils.ALI_ORACLE));
     }
 
     public void test_oracle_unique() throws Exception {
         Assert.assertEquals("SELECT count(UNIQUE *)\nFROM t",
-                            SQLUtils.format("select count(unique *) from t", JdbcUtils.ORACLE));
+                            SQLUtils.format("select count(unique *) from t", WallDenyStat.JdbcUtils.ORACLE));
         Assert.assertEquals("SELECT count(UNIQUE *)\nFROM t",
-                SQLUtils.format("select count(unique *) from t", JdbcUtils.OCEANBASE_ORACLE));
+                SQLUtils.format("select count(unique *) from t", WallDenyStat.JdbcUtils.OCEANBASE_ORACLE));
         Assert.assertEquals("SELECT count(UNIQUE *)\nFROM t",
-                            SQLUtils.format("select count(unique *) from t", JdbcUtils.ALI_ORACLE));
+                            SQLUtils.format("select count(unique *) from t", WallDenyStat.JdbcUtils.ALI_ORACLE));
     }
 
     public void test_postgres() throws Exception {
-        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, JdbcUtils.POSTGRESQL));
+        Assert.assertEquals("SELECT count(DISTINCT *)\nFROM t", SQLUtils.format(sql, WallDenyStat.JdbcUtils.POSTGRESQL));
     }
 
     public void test_sql92() throws Exception {

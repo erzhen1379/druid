@@ -1,15 +1,11 @@
 package com.alibaba.druid.mysql;
 
 import com.alibaba.druid.DbTestCase;
-import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.MySqlUtils;
 import com.alibaba.fastjson.util.TypeUtils;
 //import com.mysql.jdbc.ConnectionImpl;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**

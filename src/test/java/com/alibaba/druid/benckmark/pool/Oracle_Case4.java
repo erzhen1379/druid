@@ -25,6 +25,7 @@ import java.util.concurrent.CountDownLatch;
 
 import javax.sql.DataSource;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -32,7 +33,6 @@ import org.springframework.util.Assert;
 
 import com.alibaba.druid.TestUtil;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class Oracle_Case4 extends TestCase {
 
@@ -125,7 +125,7 @@ public class Oracle_Case4 extends TestCase {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM WP_ORDERS");
 
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
 
         rs.close();
         stmt.close();
@@ -138,7 +138,7 @@ public class Oracle_Case4 extends TestCase {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
 
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
 
         rs.close();
         stmt.close();
@@ -149,7 +149,7 @@ public class Oracle_Case4 extends TestCase {
         Connection conn = dataSource.getConnection();
 
         ResultSet rs = conn.getMetaData().getTables(null, "ALIBABA", null, new String[] { "TABLE" });
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
         rs.close();
 
         conn.close();

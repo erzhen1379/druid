@@ -25,7 +25,7 @@ import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.druid.pool.ValidConnectionChecker;
 import com.alibaba.druid.pool.ValidConnectionCheckerAdapter;
 import com.alibaba.druid.proxy.jdbc.ConnectionProxy;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 public class OracleValidConnectionChecker extends ValidConnectionCheckerAdapter implements ValidConnectionChecker, Serializable {
 
@@ -84,8 +84,8 @@ public class OracleValidConnectionChecker extends ValidConnectionCheckerAdapter 
             rs = stmt.executeQuery(validateQuery);
             return true;
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(stmt);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(stmt);
         }
     }
 }

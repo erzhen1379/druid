@@ -2,13 +2,13 @@ package com.alibaba.druid.bvt.filter;
 
 import java.sql.Connection;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import junit.framework.TestCase;
 
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class Slf4jFilterTest extends TestCase {
 
@@ -23,7 +23,7 @@ public class Slf4jFilterTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_slf4j() throws Exception {

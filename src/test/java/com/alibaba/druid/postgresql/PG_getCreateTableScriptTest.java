@@ -1,15 +1,13 @@
 package com.alibaba.druid.postgresql;
 
 import com.alibaba.druid.DbTestCase;
-import com.alibaba.druid.benckmark.proxy.BenchmarkExecutor;
 import com.alibaba.druid.pool.vendor.PGValidConnectionChecker;
 import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,9 +32,9 @@ public class PG_getCreateTableScriptTest extends DbTestCase {
         Statement stmt = conn.createStatement();;
         ResultSet rs = stmt.executeQuery("SELECT * FROM pg_catalog.pg_tables " +
                 "where schemaname not in ('pg_catalog', 'information_schema', 'sys')");
-        JdbcUtils.printResultSet(rs);
+        WallDenyStat.JdbcUtils.printResultSet(rs);
 
-        List<String> tables = JdbcUtils.showTables(conn, JdbcConstants.POSTGRESQL);
+        List<String> tables = WallDenyStat.JdbcUtils.showTables(conn, JdbcConstants.POSTGRESQL);
         for (String table : tables) {
 //            Object cnt = JdbcUtils.executeQuery(conn, "select count(*) CNT from " + table, Collections.emptyList())
 //                    .get(0)

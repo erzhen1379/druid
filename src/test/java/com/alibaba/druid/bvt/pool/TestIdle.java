@@ -19,6 +19,7 @@ import java.sql.Connection;
 
 import javax.management.openmbean.TabularData;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
@@ -27,14 +28,13 @@ import com.alibaba.druid.mock.MockConnection;
 import com.alibaba.druid.mock.MockDriver;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.stat.DruidDataSourceStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestIdle extends TestCase {
 
     private DruidDataSource dataSource;
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
         DruidDataSourceStatManager.clear();
     }
 

@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Map;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import junit.framework.TestCase;
 
 import com.alibaba.druid.proxy.jdbc.JdbcParameter;
 import com.alibaba.druid.proxy.jdbc.PreparedStatementProxy;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PreparedStatementProxyImplGetParametersTest extends TestCase {
 
@@ -22,7 +22,7 @@ public class PreparedStatementProxyImplGetParametersTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(conn);
+        WallDenyStat.JdbcUtils.close(conn);
     }
 
     public void test_get_parameters() throws Exception {

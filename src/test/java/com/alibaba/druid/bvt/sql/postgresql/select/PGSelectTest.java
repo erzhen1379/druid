@@ -17,6 +17,7 @@ package com.alibaba.druid.bvt.sql.postgresql.select;
 
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import com.alibaba.druid.sql.PGTest;
@@ -24,7 +25,6 @@ import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.postgresql.parser.PGSQLStatementParser;
 import com.alibaba.druid.sql.dialect.postgresql.visitor.PGSchemaStatVisitor;
 import com.alibaba.druid.sql.visitor.ParameterizedOutputVisitorUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
 
 public class PGSelectTest extends PGTest {
@@ -57,7 +57,7 @@ public class PGSelectTest extends PGTest {
 
         Assert.assertEquals(0, visitor.getColumns().size());
         
-        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.POSTGRESQL);
+        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.POSTGRESQL);
         System.out.println(mergedSql);
     }
     
@@ -81,7 +81,7 @@ public class PGSelectTest extends PGTest {
         
         Assert.assertEquals(0, visitor.getColumns().size());
         
-        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.POSTGRESQL);
+        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.POSTGRESQL);
         System.out.println(mergedSql);
     }
     
@@ -105,7 +105,7 @@ public class PGSelectTest extends PGTest {
         
         Assert.assertEquals(0, visitor.getColumns().size());
         
-        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.POSTGRESQL);
+        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.POSTGRESQL);
         System.out.println(mergedSql);
     }
     
@@ -129,7 +129,7 @@ public class PGSelectTest extends PGTest {
         
         Assert.assertEquals(0, visitor.getColumns().size());
         
-        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, JdbcUtils.POSTGRESQL);
+        String mergedSql = ParameterizedOutputVisitorUtils.parameterize(sql, WallDenyStat.JdbcUtils.POSTGRESQL);
         System.out.println(mergedSql);
     }
 

@@ -1,7 +1,7 @@
 package com.alibaba.druid.bvt.pool;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import java.sql.Connection;
@@ -37,7 +37,7 @@ public class KeepAliveTest_scheduler extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_keepAlive() throws Exception {

@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import com.alibaba.druid.sql.PGTest;
@@ -28,7 +29,6 @@ import com.alibaba.druid.sql.dialect.postgresql.parser.PGSQLStatementParser;
 import com.alibaba.druid.sql.dialect.postgresql.visitor.PGOutputVisitor;
 import com.alibaba.druid.sql.dialect.postgresql.visitor.PGSchemaStatVisitor;
 import com.alibaba.druid.util.Utils;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PostgresqlResourceTest extends PGTest {
 
@@ -47,7 +47,7 @@ public class PostgresqlResourceTest extends PGTest {
         is = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
         Reader reader = new InputStreamReader(is, "UTF-8");
         String input = Utils.read(reader);
-        JdbcUtils.close(reader);
+        WallDenyStat.JdbcUtils.close(reader);
         String[] items = input.split("---------------------------");
         String sql = items[0].trim();
         String expect = items[1].trim();

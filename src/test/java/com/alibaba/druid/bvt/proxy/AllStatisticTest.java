@@ -26,13 +26,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.management.openmbean.TabularData;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.proxy.DruidDriver;
 import com.alibaba.druid.stat.JdbcStatManager;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class AllStatisticTest extends TestCase {
 
@@ -65,7 +65,7 @@ public class AllStatisticTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(globalConnection);
+        WallDenyStat.JdbcUtils.close(globalConnection);
         DruidDriver.getProxyDataSources().clear();
         Assert.assertEquals(0, JdbcStatManager.getInstance().getSqlList().size());
     }
@@ -94,8 +94,8 @@ public class AllStatisticTest extends TestCase {
                 rs.getObject(1);
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(pstmt);
         }
     }
 
@@ -116,9 +116,9 @@ public class AllStatisticTest extends TestCase {
             }
         } catch (SQLException ex) {
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(pstmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 
@@ -139,9 +139,9 @@ public class AllStatisticTest extends TestCase {
                 rs.getObject(1);
             }
         } finally {
-            JdbcUtils.close(rs);
-            JdbcUtils.close(pstmt);
-            JdbcUtils.close(conn);
+            WallDenyStat.JdbcUtils.close(rs);
+            WallDenyStat.JdbcUtils.close(pstmt);
+            WallDenyStat.JdbcUtils.close(conn);
         }
     }
 }

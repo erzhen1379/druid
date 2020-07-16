@@ -5,13 +5,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import org.junit.After;
 import org.junit.Before;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.alibaba.druid.util.JdbcUtils;
 
 /**
  * @author Jonas Yang
@@ -36,7 +36,7 @@ public class ConfigFileGenerator {
         } catch (IOException e) {
             Assert.assertNull("Failed to init resource.", e);
         } finally {
-            JdbcUtils.close(out);
+            WallDenyStat.JdbcUtils.close(out);
         }
     }
 

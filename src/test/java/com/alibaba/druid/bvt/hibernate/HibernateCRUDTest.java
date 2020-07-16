@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.hibernate.Session;
@@ -15,7 +16,6 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 
 import com.alibaba.druid.bvt.hibernate.entity.Sample;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 /**
  * @author yinheli [yinheli@gmail.com]
@@ -62,7 +62,7 @@ public class HibernateCRUDTest extends TestCase {
 	@Override
 	public void tearDown() throws Exception {
 		sessionFactory.close();
-		JdbcUtils.close(dataSource);
+		WallDenyStat.JdbcUtils.close(dataSource);
 	}
 
 	private void doCreate(Session session) {

@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -26,7 +27,6 @@ import com.alibaba.druid.mock.MockClob;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.proxy.jdbc.ClobProxy;
 import com.alibaba.druid.stat.JdbcSqlStat;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class StatFilterClobTest extends TestCase {
 
@@ -43,7 +43,7 @@ public class StatFilterClobTest extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_clob() throws Exception {

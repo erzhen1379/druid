@@ -7,8 +7,8 @@ import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.oracle.parser.OracleStatementParser;
 import com.alibaba.druid.sql.dialect.oracle.visitor.OracleOutputVisitor;
-import com.alibaba.druid.util.JdbcUtils;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import junit.framework.TestCase;
@@ -32,7 +32,7 @@ public class OracleHintTest extends TestCase {
 	
 	public void test_hint2() throws Exception {
 		String sql = "SELECT /*+leading(e) index(e ORD_ORDER_ITEM_GS_BS_DI_IND)*/ distinct e.id from ord_order_item e where e.F1 = Date '2011-10-01'";
-		String countSQL = PagerUtils.count(sql, JdbcUtils.ORACLE);		
+		String countSQL = PagerUtils.count(sql, WallDenyStat.JdbcUtils.ORACLE);
 		Assert.assertEquals("SELECT /*+leading(e) index(e ORD_ORDER_ITEM_GS_BS_DI_IND)*/ COUNT(DISTINCT e.id)\nFROM ord_order_item e\nWHERE e.F1 = DATE '2011-10-01'", countSQL);
 	}
 	

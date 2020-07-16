@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
@@ -11,7 +12,6 @@ import com.alibaba.druid.filter.config.ConfigFilter;
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class ConfigFilterTest3 extends TestCase {
 
@@ -23,7 +23,7 @@ public class ConfigFilterTest3 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_0() throws Exception {

@@ -19,11 +19,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class TestH2 extends TestCase {
 
@@ -39,11 +39,11 @@ public class TestH2 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_h2() throws Exception {
-        Assert.assertSame(JdbcUtils.H2, dataSource.getDbType());
+        Assert.assertSame(WallDenyStat.JdbcUtils.H2, dataSource.getDbType());
         
         Connection conn = dataSource.getConnection();
 

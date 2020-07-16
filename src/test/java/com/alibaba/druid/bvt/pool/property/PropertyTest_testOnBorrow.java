@@ -1,11 +1,11 @@
 package com.alibaba.druid.bvt.pool.property;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import org.junit.Assert;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 
 public class PropertyTest_testOnBorrow extends TestCase {
@@ -27,6 +27,6 @@ public class PropertyTest_testOnBorrow extends TestCase {
     
     protected void tearDown() throws Exception {
         System.clearProperty("druid.testOnBorrow");
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 }

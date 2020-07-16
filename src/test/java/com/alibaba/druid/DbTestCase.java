@@ -1,7 +1,7 @@
 package com.alibaba.druid;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.wall.WallDenyStat;
 import junit.framework.TestCase;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ public abstract class DbTestCase extends TestCase {
             configStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
             properties.load(configStream);
         } finally {
-            JdbcUtils.close(configStream);
+            WallDenyStat.JdbcUtils.close(configStream);
         }
 
         DruidDataSource dataSource = new DruidDataSource();

@@ -19,13 +19,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.mock.MockDriver;
 import com.alibaba.druid.mock.MockPreparedStatement;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class Bug_for_xuershan extends TestCase {
 
@@ -45,7 +45,7 @@ public class Bug_for_xuershan extends TestCase {
     }
     
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_bug_for_xuershan() throws Exception {

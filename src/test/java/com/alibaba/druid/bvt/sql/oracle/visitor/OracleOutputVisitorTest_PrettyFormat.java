@@ -2,6 +2,7 @@ package com.alibaba.druid.bvt.sql.oracle.visitor;
 
 import java.util.List;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 
 import org.junit.Test;
@@ -11,7 +12,6 @@ import com.alibaba.druid.sql.dialect.oracle.visitor.OracleOutputVisitor;
 import com.alibaba.druid.sql.parser.SQLParserUtils;
 import com.alibaba.druid.sql.parser.SQLStatementParser;
 import com.alibaba.druid.sql.visitor.SQLASTOutputVisitor;
-import com.alibaba.druid.util.JdbcUtils;
 
 /**
  *
@@ -24,7 +24,7 @@ public class OracleOutputVisitorTest_PrettyFormat {
     @Test
     public void testConnectByParserAndPrettyFormatOutput() {
         String sql = "select * from ge_rms_company start with comcode = '00' connect by nocycle prior comcode = uppercomcode";
-        SQLStatementParser parser = SQLParserUtils.createSQLStatementParser(sql, JdbcUtils.ORACLE);
+        SQLStatementParser parser = SQLParserUtils.createSQLStatementParser(sql, WallDenyStat.JdbcUtils.ORACLE);
         List<SQLStatement> stmtList = parser.parseStatementList();
         StringBuilder out = new StringBuilder();
         // PrettyFormat use default : true

@@ -2,6 +2,7 @@ package com.alibaba.druid.bvt.filter.config;
 
 import java.sql.SQLException;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +10,6 @@ import com.alibaba.druid.filter.config.ConfigFileGenerator;
 import com.alibaba.druid.filter.config.ConfigFilter;
 import com.alibaba.druid.mock.MockDriver;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.JdbcUtils;
 
 /**
  * @author Jonas Yang
@@ -28,7 +28,7 @@ public class ConfigFilterTest extends ConfigFileGenerator {
 
             Assert.assertEquals("The username is " + dataSource.getUsername(), "test1", dataSource.getUsername());
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -44,7 +44,7 @@ public class ConfigFilterTest extends ConfigFileGenerator {
             Assert.assertEquals("The username is " + dataSource.getUsername(), "test1", dataSource.getUsername());
         } finally {
             System.clearProperty(ConfigFilter.SYS_PROP_CONFIG_FILE);
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -60,7 +60,7 @@ public class ConfigFilterTest extends ConfigFileGenerator {
         } catch (IllegalArgumentException e) {
             error = e;
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
         Assert.assertNotNull(error);
     }
@@ -80,7 +80,7 @@ public class ConfigFilterTest extends ConfigFileGenerator {
             Assert.assertEquals("The password is " + dataSource.getPassword() + ", is not xiaoyu", "xiaoyu",
                                 dataSource.getPassword());
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -94,7 +94,7 @@ public class ConfigFilterTest extends ConfigFileGenerator {
 
             Assert.assertEquals("The password is " + dataSource.getPassword(), "xiaoyu", dataSource.getPassword());
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -106,7 +106,7 @@ public class ConfigFilterTest extends ConfigFileGenerator {
         try {
             dataSource.init();
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
     }
 
@@ -123,7 +123,7 @@ public class ConfigFilterTest extends ConfigFileGenerator {
         } catch (IllegalArgumentException e) {
             error = e;
         } finally {
-            JdbcUtils.close(dataSource);
+            WallDenyStat.JdbcUtils.close(dataSource);
         }
         Assert.assertNotNull(error);
     }

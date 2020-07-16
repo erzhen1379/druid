@@ -18,12 +18,12 @@ package com.alibaba.druid.bvt.pool;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import com.alibaba.druid.wall.WallDenyStat;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledPreparedStatement;
-import com.alibaba.druid.util.JdbcUtils;
 
 public class PSCacheTest2 extends TestCase {
 
@@ -38,7 +38,7 @@ public class PSCacheTest2 extends TestCase {
     }
 
     protected void tearDown() throws Exception {
-        JdbcUtils.close(dataSource);
+        WallDenyStat.JdbcUtils.close(dataSource);
     }
 
     public void test_0() throws Exception {
