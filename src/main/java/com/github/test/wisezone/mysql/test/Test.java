@@ -39,15 +39,15 @@ public class Test {
     public static void main(String[] args) {
         //测试添加
         //测试根据id查询
-        //queryOne();
+        queryOne();
 
         //测试修改的方法
-        update();
+     //   update();
 
         //测试根据id删除
         //remove();
 
         //测试查询全部
-        queryAll();
+       // queryAll();
     }
 }

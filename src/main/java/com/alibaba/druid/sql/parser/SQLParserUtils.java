@@ -49,13 +49,21 @@ import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallDenyStat;
 
 public class SQLParserUtils {
-
+    /**
+     * 判断是什么类型
+     *
+     * @param sql
+     * @param dbType
+     * @return
+     */
     public static SQLStatementParser createSQLStatementParser(String sql, String dbType) {
         SQLParserFeature[] features;
         if (JdbcConstants.ODPS.equals(dbType) || JdbcConstants.MYSQL.equals(dbType)) {
-            features = new SQLParserFeature[] {SQLParserFeature.KeepComments};
+            features = new SQLParserFeature[]{
+                    SQLParserFeature.KeepComments
+            };
         } else {
-            features = new SQLParserFeature[] {};
+            features = new SQLParserFeature[]{};
         }
         return createSQLStatementParser(sql, dbType, features);
     }
@@ -63,14 +71,22 @@ public class SQLParserUtils {
     public static SQLStatementParser createSQLStatementParser(String sql, String dbType, boolean keepComments) {
         SQLParserFeature[] features;
         if (keepComments) {
-            features = new SQLParserFeature[] {SQLParserFeature.KeepComments};
+            features = new SQLParserFeature[]{SQLParserFeature.KeepComments};
         } else {
-            features = new SQLParserFeature[] {};
+            features = new SQLParserFeature[]{};
         }
 
         return createSQLStatementParser(sql, dbType, features);
     }
 
+    /**
+     * 判断解析sql类型
+     *
+     * @param sql
+     * @param dbType
+     * @param features
+     * @return
+     */
     public static SQLStatementParser createSQLStatementParser(String sql, String dbType, SQLParserFeature... features) {
         if (WallDenyStat.JdbcUtils.isOracleDbType(dbType)) {
             return new OracleStatementParser(sql);
@@ -79,7 +95,9 @@ public class SQLParserUtils {
         if (WallDenyStat.JdbcUtils.H2.equals(dbType)) {
             return new H2StatementParser(sql);
         }
-
+        /**
+         * 解析mysql的语句
+         */
         if (WallDenyStat.JdbcUtils.isMysqlDbType(dbType)) {
             return new MySqlStatementParser(sql, features);
         }
@@ -97,7 +115,7 @@ public class SQLParserUtils {
         if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2StatementParser(sql);
         }
-        
+
         if (WallDenyStat.JdbcUtils.ODPS.equals(dbType)) {
             return new OdpsStatementParser(sql);
         }
@@ -135,11 +153,11 @@ public class SQLParserUtils {
         if (WallDenyStat.JdbcUtils.isSqlserverDbType(dbType)) {
             return new SQLServerExprParser(sql);
         }
-        
+
         if (WallDenyStat.JdbcUtils.DB2.equals(dbType)) {
             return new DB2ExprParser(sql);
         }
-        
+
         if (WallDenyStat.JdbcUtils.ODPS.equals(dbType)) {
             return new OdpsExprParser(sql);
         }
@@ -212,5 +230,5 @@ public class SQLParserUtils {
         }
 
         return new SQLSelectQueryBlock();
-     }
+    }
 }

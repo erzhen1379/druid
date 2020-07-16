@@ -176,3 +176,13 @@ java.sql.SQLException: url not set
 	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:98)
 	at com.github.test.wisezone.Test.main(Test.java:25)
 2020-07-16 16:26:56  [ main:1 ] - [ ERROR ]  初始化数据源成功
+2020-07-16 16:33:09  [ main:0 ] - [ ERROR ]  {dataSource-1} init error
+java.sql.SQLException: url not set
+	at com.alibaba.druid.pool.DruidDataSource.resolveDriver(DruidDataSource.java:1199)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:876)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1378)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1374)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:98)
+	at com.github.test.wisezone.Test.main(Test.java:25)
+2020-07-16 16:47:16  [ main:1 ] - [ ERROR ]  初始化数据源成功
+2020-07-16 16:47:54  [ main:2 ] - [ ERROR ]  初始化数据源成功
