@@ -20,6 +20,7 @@ import com.alibaba.druid.util.FnvHash;
 import com.alibaba.druid.util.StringUtils;
 
 public class SQLParser {
+    //语词分析
     protected final Lexer lexer;
     protected String      dbType;
 

@@ -55,6 +55,7 @@ import com.alibaba.druid.util.StringUtils;
  */
 public class Lexer {
     protected static SymbolTable symbols_l2 = new SymbolTable(512);
+    public Token token;
 
     protected int          features       = 0; //SQLParserFeature.of(SQLParserFeature.EnableSQLBinaryOpExprGroup);
     public    final String text;
@@ -66,7 +67,7 @@ public class Lexer {
     protected char[]       buf;
     protected int          bufPos;
 
-    protected Token        token;
+   // protected Token        token;
 
     protected Keywords     keywods        = Keywords.DEFAULT_KEYWORDS;
 
